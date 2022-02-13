@@ -20,16 +20,19 @@ public class FindImageTargetPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject marker = GameObject.Find("PositionMarker");
+        GameObject marker = GameObject.Find("VuforiaPositionMarker");
         // GameObject camera = GameObject.Find("PositionMarker");
         Vector3 pos = marker.transform.localPosition;
+        GameObject child = GameObject.Find("Sphere1");
         if (pos != Vector3.zero)
         {
             if (!already_got)
             {
                 origin_position = pos;
                 already_got = true;
-                transform.position = origin_position;
+                transform.localPosition = origin_position;
+                // child.transform.localPosition = Vector3.zero;
+                // child.transform.position = origin_position;
                 // Attach world anchor.
                 manager.AttachAnchor(marker);
                 marker.AddComponent<WorldAnchor>();
