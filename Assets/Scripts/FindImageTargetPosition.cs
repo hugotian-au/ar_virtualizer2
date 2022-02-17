@@ -39,8 +39,8 @@ public class FindImageTargetPosition : MonoBehaviour
                 TrackerManager.Instance.GetTracker<ObjectTracker>().Stop();
 
                 // Disable vuforia behavior
-                // GameObject camera = GameObject.Find("Main Camera");
-                // camera.GetComponent<VuforiaBehaviour>().enabled = false;
+                GameObject camera = GameObject.Find("Main Camera");
+                camera.GetComponent<VuforiaBehaviour>().enabled = false;
             }
         }
         print("origin_position is: " + origin_position);
