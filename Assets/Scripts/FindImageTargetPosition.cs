@@ -24,6 +24,7 @@ public class FindImageTargetPosition : MonoBehaviour
         // GameObject camera = GameObject.Find("PositionMarker");
         Vector3 pos = marker.transform.localPosition;
         GameObject child = GameObject.Find("Sphere1");
+        GameObject camera = GameObject.Find("Main Camera");
         if (pos != Vector3.zero)
         {
             if (!already_got)
@@ -39,9 +40,14 @@ public class FindImageTargetPosition : MonoBehaviour
                 TrackerManager.Instance.GetTracker<ObjectTracker>().Stop();
 
                 // Disable vuforia behavior
-                GameObject camera = GameObject.Find("Main Camera");
                 camera.GetComponent<VuforiaBehaviour>().enabled = false;
             }
+            manager.AttachAnchor(marker);
+            marker.AddComponent<WorldAnchor>();
+            TrackerManager.Instance.GetTracker<ObjectTracker>().Stop();
+
+            // Disable vuforia behavior
+            camera.GetComponent<VuforiaBehaviour>().enabled = false;
         }
         print("origin_position is: " + origin_position);
     }

@@ -67,7 +67,7 @@ namespace Photon.Pun.Demo.PunBasics
 		{
 			// progressLabel.SetActive(false);
 			// controlPanel.SetActive(false);
-			print("called by start");
+			print("Called by start");
 			Connect();
 		}
 
