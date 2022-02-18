@@ -4,30 +4,34 @@ using UnityEngine;
 using UnityEngine.XR.WSA;
 using Microsoft.MixedReality.Toolkit.Experimental.Utilities;
 using Vuforia;
+using Photon.Realtime;
+using Photon.Pun;
 
-
-public class FindImageTargetPosition : MonoBehaviour
+public class TrackerHandler : MonoBehaviour
 {
     public Vector3 origin_position;
-    public bool already_got = false;
     private WorldAnchorManager manager;
+
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         manager = FindObjectOfType<WorldAnchorManager>();
     }
-
-    // Update is called once per frame
-    void Update()
+    // On Image Target Tracker Found
+    public void OnTrackerFound()
     {
         GameObject marker = GameObject.Find("VuforiaPositionMarker");
-        // GameObject camera = GameObject.Find("PositionMarker");
         Vector3 pos = marker.transform.localPosition;
+        // GameObject child = GameObject.Find("Sphere1");
         GameObject camera = GameObject.Find("Main Camera");
         if (pos != Vector3.zero)
         {
             origin_position = pos;
-            already_got = true;
             transform.localPosition = origin_position;
             // child.transform.localPosition = Vector3.zero;
             // child.transform.position = origin_position;
@@ -38,7 +42,8 @@ public class FindImageTargetPosition : MonoBehaviour
 
             // Disable vuforia behavior
             camera.GetComponent<VuforiaBehaviour>().enabled = false;
+
+            PhotonNetwork.LoadLevel("Start");
         }
-        print("origin_position is: " + origin_position);
     }
 }
