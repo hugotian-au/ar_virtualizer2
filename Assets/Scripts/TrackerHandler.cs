@@ -44,7 +44,7 @@ public class TrackerHandler : MonoBehaviour
             camera.GetComponent<VuforiaBehaviour>().enabled = false;
             marker.SetActive(false);
 
-            PhotonNetwork.LoadLevel("Start");
+            PhotonNetwork.LoadLevel("Room");
         }
     }
 }

@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/VuforiaTracker.unity
     guid: d8c263df6c02de14585a2ecb3d44eb26
   - enabled: 1
-    path: Assets/Scenes/start.unity
-    guid: b903d9ef0564aa94191622bdc65333ef
+    path: Assets/Scenes/Room.unity
+    guid: 9bff59d8f15933e47abf8c4e3e129507
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: ccfcc1c19beeb3e40b6ffecd226da296,
       type: 2}
