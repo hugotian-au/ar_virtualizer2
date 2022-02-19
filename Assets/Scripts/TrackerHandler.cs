@@ -42,6 +42,7 @@ public class TrackerHandler : MonoBehaviour
 
             // Disable vuforia behavior
             camera.GetComponent<VuforiaBehaviour>().enabled = false;
+            marker.SetActive(false);
 
             PhotonNetwork.LoadLevel("Start");
         }

@@ -15,12 +15,13 @@ public class FindImageTargetPosition : MonoBehaviour
     void Start()
     {
         manager = FindObjectOfType<WorldAnchorManager>();
+        VuforiaBehaviour.Instance.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject marker = GameObject.Find("VuforiaPositionMarker");
+        GameObject marker = GameObject.Find("TrackerHandler");
         // GameObject camera = GameObject.Find("PositionMarker");
         Vector3 pos = marker.transform.localPosition;
         GameObject camera = GameObject.Find("Main Camera");
