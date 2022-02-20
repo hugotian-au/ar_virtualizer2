@@ -14,6 +14,7 @@ public class MyPlayerControl : MonoBehaviourPunCallbacks
     void Start()
     {
         PhotonNetwork.Instantiate(this.localPlayerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+        // PhotonNetwork.InstantiateSceneObject()
     }
 
 
