@@ -9,36 +9,25 @@ using Vuforia;
 public class FindImageTargetPosition : MonoBehaviour
 {
     public Vector3 origin_position;
-    public bool already_got = false;
-    private WorldAnchorManager manager;
+    private GameObject marker;
     // Start is called before the first frame update
     void Start()
     {
-        manager = FindObjectOfType<WorldAnchorManager>();
-        VuforiaBehaviour.Instance.enabled = false;
+        marker = GameObject.Find("TrackerHandler");
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject marker = GameObject.Find("TrackerHandler");
         // GameObject camera = GameObject.Find("PositionMarker");
-        Vector3 pos = marker.transform.localPosition;
-        GameObject camera = GameObject.Find("Main Camera");
-        if (pos != Vector3.zero)
+        if (marker != null)
         {
-            origin_position = pos;
-            already_got = true;
-            transform.localPosition = origin_position;
-            // child.transform.localPosition = Vector3.zero;
-            // child.transform.position = origin_position;
-            // Attach world anchor.
-            manager.AttachAnchor(marker);
-            marker.AddComponent<WorldAnchor>();
-            TrackerManager.Instance.GetTracker<ObjectTracker>().Stop();
-
-            // Disable vuforia behavior
-            camera.GetComponent<VuforiaBehaviour>().enabled = false;
+            Vector3 pos = marker.transform.localPosition;
+            if (pos != Vector3.zero)
+            {
+                origin_position = pos;
+                transform.localPosition = origin_position;
+            }
         }
         print("origin_position is: " + origin_position);
     }
