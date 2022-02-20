@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 1889884415}
   - component: {fileID: 1889884414}
   m_Layer: 0
-  m_Name: PlayerControl
+  m_Name: PlayerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -747,7 +747,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1889884413}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f26749dd62e50054eb99cea94671a511, type: 3}
+  m_Script: {fileID: 11500000, guid: 34879e8f102d7db4689bf75b3b78142c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   localPlayerPrefab: {fileID: 5801166283699331900, guid: 3054ec709261d0140b0bc0377fab577f,

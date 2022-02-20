@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class MyPlayerControl : MonoBehaviourPunCallbacks
+public class MyPlayerManager : MonoBehaviourPunCallbacks
 {
     [Tooltip("The prefab to use for representing the player")]
     public GameObject localPlayerPrefab;
