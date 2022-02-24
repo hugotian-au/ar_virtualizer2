@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DynamicObjectSpawner : MonoBehaviour
+public class MyParenting : MonoBehaviour
 {
+    private GameObject parent;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        parent = GameObject.Find("ARContent");
+        transform.parent = parent.transform;
     }
 }

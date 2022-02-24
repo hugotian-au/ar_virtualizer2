@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 4756455432016877931}
   - component: {fileID: 8217556623482220577}
   - component: {fileID: 2503340892711553936}
+  - component: {fileID: 6675143497845250397}
   m_Layer: 0
   m_Name: project_room_5_platform
   m_TagString: Untagged
@@ -151,3 +152,15 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &6675143497845250397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5280896826347062225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5735e3017b31689449a0db9d469538d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
