@@ -1114,6 +1114,7 @@ GameObject:
   - component: {fileID: 1936724310027352090}
   - component: {fileID: 4926646902609387874}
   - component: {fileID: 7499331822388878423}
+  - component: {fileID: 3691659840071494926}
   m_Layer: 0
   m_Name: VRMale
   m_TagString: Untagged
@@ -1247,6 +1248,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5735e3017b31689449a0db9d469538d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &3691659840071494926
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3656235178310044522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3760810703568438214
 GameObject:
   m_ObjectHideFlags: 0

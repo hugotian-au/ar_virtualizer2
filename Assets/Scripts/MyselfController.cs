@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PunPlayerManager : MonoBehaviourPunCallbacks
+public class MyselfController : MonoBehaviourPunCallbacks
 {
     #region Private Fields
 
@@ -12,8 +12,10 @@ public class PunPlayerManager : MonoBehaviourPunCallbacks
     private GameObject beams;
     [Tooltip("The current Health of our player")]
     public float Health = 1f;
-    //True, when the user is firing
+    // True, when the user is firing
     bool IsFiring;
+    // Find the Main Camera's position
+    private GameObject parent;
     #endregion
 
     #region MonoBehaviour CallBacks
@@ -31,6 +33,13 @@ public class PunPlayerManager : MonoBehaviourPunCallbacks
         {
             beams.SetActive(false);
         }
+    }
+
+    void Start()
+    {
+        parent = GameObject.Find("Main Camera");
+        transform.parent = parent.transform;
+        transform.localPosition = new Vector3(0.0f, -1.8f, 0.0f);
     }
 
     /// <summary>
