@@ -49,7 +49,8 @@ public class PlayerAnimatorManager : MonoBehaviour
         {
             v = 0;
         }
-        animator.SetFloat("Speed", h * h + v * v);
+        //animator.SetFloat("Speed", h * h + v * v);
+        animator.SetFloat("Speed", 0.5f);
         animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
     }
 
