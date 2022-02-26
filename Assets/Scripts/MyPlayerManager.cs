@@ -9,11 +9,13 @@ public class MyPlayerManager : MonoBehaviourPunCallbacks
     [Tooltip("The prefab to use for representing the player")]
     public GameObject localPlayerPrefab;
     public GameObject remotePlayerPrefab;
+    public GameObject SceneObjectManPrefab;
 
     // Start is called before the first frame update
     void Start()
     {
         PhotonNetwork.Instantiate(this.localPlayerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(this.SceneObjectManPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
         // PhotonNetwork.InstantiateSceneObject()
     }
 

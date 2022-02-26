@@ -753,6 +753,8 @@ MonoBehaviour:
     type: 3}
   remotePlayerPrefab: {fileID: 3656235178310044522, guid: f9072611cc428a3448eaa1132453fff5,
     type: 3}
+  SceneObjectManPrefab: {fileID: 6920349427499508837, guid: 47454eaee8bb618449cf9ce220c09733,
+    type: 3}
 --- !u!4 &1889884415
 Transform:
   m_ObjectHideFlags: 0
