@@ -8,7 +8,7 @@ public class MyParenting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        parent = GameObject.Find("MixedRealityPlayspace");
+        parent = GameObject.Find("ARContent");
         transform.parent = parent.transform;
     }
 }
