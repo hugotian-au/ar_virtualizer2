@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class MyselfController : MonoBehaviourPunCallbacks
+public class ARUserController : MonoBehaviourPunCallbacks
 {
     #region Private Fields
     // Find the Main Camera's position
@@ -19,9 +19,12 @@ public class MyselfController : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        parent = GameObject.Find("Main Camera");
-        transform.parent = parent.transform;
-        transform.localPosition = new Vector3(0.0f, -1.8f, 0.0f);
+        if (photonView.IsMine)
+        {
+            parent = GameObject.Find("Main Camera");
+            transform.parent = parent.transform;
+            transform.localPosition = new Vector3(0.0f, -1.8f, 0.0f);
+        }
     }
 
     /// <summary>

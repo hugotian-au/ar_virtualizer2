@@ -2023,9 +2023,8 @@ GameObject:
   - component: {fileID: 6614153236849850758}
   - component: {fileID: 6647462782396829155}
   - component: {fileID: 3158701398294467881}
-  - component: {fileID: 6172952470771107239}
-  - component: {fileID: 526480749707941102}
   - component: {fileID: 2944924782313497419}
+  - component: {fileID: 5035496893235647879}
   m_Layer: 0
   m_Name: ARFemale
   m_TagString: Untagged
@@ -2094,33 +2093,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &6172952470771107239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5801166283699331900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 703180c7285f5a14989406bedcb629da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  directionDampTime: 0.25
---- !u!114 &526480749707941102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5801166283699331900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26a38e980b7dcc1408868ba3b58bd66d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beams: {fileID: 0}
-  Health: 1
 --- !u!114 &2944924782313497419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2143,6 +2115,18 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &5035496893235647879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5801166283699331900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727c71477994adc4e9ee06a9bdc41e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5968723503468532203
 GameObject:
   m_ObjectHideFlags: 0
