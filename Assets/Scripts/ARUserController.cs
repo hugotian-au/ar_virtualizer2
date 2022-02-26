@@ -8,7 +8,11 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
     #region Private Fields
     // Find the Main Camera's position
     private GameObject parent;
+    private GameObject tracker;
     private Vector3 position = new Vector3(0, 0, 0);
+    private Vector3 trackerPosition = new Vector3(0, 0, 0);
+    private Vector3 prevPosition = new Vector3(0.0f, 0.0f, 0.0f);
+    private Animator animator;
     #endregion
 
     #region MonoBehaviour CallBacks
@@ -24,6 +28,16 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
             parent = GameObject.Find("Main Camera");
             transform.parent = parent.transform;
             transform.localPosition = new Vector3(0.0f, -1.8f, 0.0f);
+
+            tracker = GameObject.Find("TrackerHandler");
+        }
+        else
+        {
+            animator = GetComponent<Animator>();
+            if (!animator)
+            {
+                Debug.LogError("PlayerAnimatorManager is Missing Animator Component", this);
+            }
         }
     }
 
@@ -34,11 +48,34 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            position = transform.localPosition;
+            if (tracker != null)
+            {
+                position = transform.position - tracker.transform.position;
+            }
+            else
+            {
+                position = transform.position;
+            }
         }
         else
         {
+            transform.LookAt(position);
             transform.localPosition = position;
+            Vector3 diff = transform.localPosition - prevPosition;
+            // anim.SetFloat("VerticalMov", Input.GetAxis("Vertical"));
+            if (diff.x > 0.1f || diff.z > 0.1f || diff.x < -0.1f || diff.z < -0.1f)
+            {
+                // animator.SetFloat("VerticalMov", 0.2f);
+                animator.SetFloat("Speed", 0.5f);
+                // animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
+            }
+            else
+            {
+                animator.SetFloat("Speed", 0.0f);
+            }
+            // anim.SetFloat("HorizontalMov", Input.GetAxis("Horizontal"));
+
+            prevPosition = position;
         }
     }
 
