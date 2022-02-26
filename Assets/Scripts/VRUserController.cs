@@ -9,6 +9,8 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
     // Find the Main Camera's position
     private GameObject parent;
     private Vector3 position = new Vector3(0, 0, 0);
+    private Vector3 prevPosition = new Vector3(0.0f, 0.0f, 0.0f);
+    private Animator animator;
     #endregion
 
     #region MonoBehaviour CallBacks
@@ -25,6 +27,14 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
             transform.parent = parent.transform;
             transform.localPosition = new Vector3(0.0f, -1.8f, 0.0f);
         }
+        else
+        {
+            animator = GetComponent<Animator>();
+            if (!animator)
+            {
+                Debug.LogError("PlayerAnimatorManager is Missing Animator Component", this);
+            }
+        }
     }
 
     /// <summary>
@@ -34,11 +44,27 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            position = transform.localPosition;
+            position = transform.position;  // Use the world position since the localPosition is not changed
         }
         else
         {
+            transform.LookAt(position);
             transform.localPosition = position;
+            Vector3 diff = transform.localPosition - prevPosition;
+            // anim.SetFloat("VerticalMov", Input.GetAxis("Vertical"));
+            if (diff.x > 0.01f || diff.z > 0.01f || diff.x < -0.01f || diff.z < -0.01f)
+            {
+                // animator.SetFloat("VerticalMov", 0.2f);
+                animator.SetFloat("Speed", 0.3f);
+                // animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
+            }
+            else
+            {
+                animator.SetFloat("Speed", 0.0f);
+            }
+            // anim.SetFloat("HorizontalMov", Input.GetAxis("Horizontal"));
+
+            prevPosition = position;
         }
     }
 
