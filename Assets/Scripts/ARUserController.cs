@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class ARUserController : MonoBehaviourPunCallbacks
+public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region Private Fields
     // Find the Main Camera's position
@@ -42,7 +42,7 @@ public class ARUserController : MonoBehaviourPunCallbacks
         }
     }
 
-    void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
