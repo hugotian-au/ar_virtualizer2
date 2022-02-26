@@ -13,8 +13,12 @@ public class MySceneObjectManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        // PhotonNetwork.SetMasterClient(PhotonNetwork.MasterClient.GetNext());
-        // PhotonNetwork.InstantiateSceneObject(this.sceneObject1.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            var pv = GetComponent<PhotonView>();
+            pv.RPC("RPC_InstantiateSceneObject", RpcTarget.All,
+                this.sceneObject1.name, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        }
     }
 
     [PunRPC]
