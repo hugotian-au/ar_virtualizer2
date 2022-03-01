@@ -24,7 +24,10 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine)
         {
             parent = GameObject.Find("Main Camera");
-            transform.parent = parent.transform;
+            if (parent != null)
+            {
+                transform.parent = parent.transform;
+            }
             transform.localPosition = new Vector3(0.0f, -1.8f, 0.0f);
         }
         else

@@ -24,6 +24,10 @@ public class MySceneObjectManager : MonoBehaviourPunCallbacks
     [PunRPC]
     void RPC_InstantiateSceneObject(string name, Vector3 position, Quaternion rotation)
     {
-        PhotonNetwork.InstantiateSceneObject(name, position, rotation, 0);
+        var go = GameObject.Find(this.sceneObject1.name);
+        if (go == null)
+        {
+            PhotonNetwork.InstantiateSceneObject(name, position, rotation, 0);
+        }
     }
 }
