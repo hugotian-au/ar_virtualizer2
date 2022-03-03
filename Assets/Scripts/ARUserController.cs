@@ -59,12 +59,13 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            transform.LookAt(position);
-            transform.localPosition = position;
-            Vector3 diff = transform.localPosition - prevPosition;
+            Vector3 diff = position - prevPosition;
             // anim.SetFloat("VerticalMov", Input.GetAxis("Vertical"));
             if (diff.x > 0.01f || diff.z > 0.01f || diff.x < -0.01f || diff.z < -0.01f)
             {
+                var new_position = new Vector3(position.x, 0, position.z);
+                transform.LookAt(new_position);
+                transform.localPosition = new_position;
                 // animator.SetFloat("VerticalMov", 0.2f);
                 animator.SetFloat("Speed", 0.3f);
                 // animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
