@@ -23,7 +23,7 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            parent = GameObject.Find("Main Camera");
+            parent = GameObject.Find("CenterEyeAnchor");
             if (parent != null)
             {
                 transform.parent = parent.transform;
@@ -51,12 +51,12 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            transform.LookAt(position);
-            transform.localPosition = position;
-            Vector3 diff = transform.localPosition - prevPosition;
+            Vector3 diff = position - prevPosition;
             // anim.SetFloat("VerticalMov", Input.GetAxis("Vertical"));
-            if (diff.x > 0.01f || diff.z > 0.01f || diff.x < -0.01f || diff.z < -0.01f)
+            if (diff.x > 0.1f || diff.z > 0.1f || diff.x < -0.1f || diff.z < -0.1f)
             {
+                transform.LookAt(position);
+                transform.localPosition = position;
                 // animator.SetFloat("VerticalMov", 0.2f);
                 animator.SetFloat("Speed", 0.3f);
                 // animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
