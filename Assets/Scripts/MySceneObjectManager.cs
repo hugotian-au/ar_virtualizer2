@@ -15,9 +15,14 @@ public class MySceneObjectManager : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsMasterClient)
         {
-            var pv = GetComponent<PhotonView>();
-            pv.RPC("RPC_InstantiateSceneObject", RpcTarget.All,
-                this.sceneObject1.name, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            var sceneobject_name1 = this.sceneObject1.name + "(Clone)";
+            var scene_object1 = GameObject.Find(sceneobject_name1);
+            if (scene_object1 == null)
+            {
+                var pv = GetComponent<PhotonView>();
+                pv.RPC("RPC_InstantiateSceneObject", RpcTarget.All,
+                    this.sceneObject1.name, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            }
         }
     }
 
