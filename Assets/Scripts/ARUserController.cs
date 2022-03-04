@@ -7,7 +7,7 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region Private Fields
     // Find the Main Camera's position
-    private GameObject parent;
+    private GameObject parent_camera;
     private GameObject tracker;
     private Vector3 position = new Vector3(0, 0, 0);
     private Vector3 trackerPosition = new Vector3(0, 0, 0);
@@ -25,11 +25,25 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            parent = GameObject.Find("Main Camera");
-            transform.parent = parent.transform;
-            transform.localPosition = new Vector3(0.0f, -1.8f, 0.0f);
-
+            parent_camera = GameObject.Find("Main Camera");
             tracker = GameObject.Find("TrackerHandler");
+
+            var camera_position = parent_camera.transform.position;
+            var lookPos = camera_position - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            // rotation *= Quaternion.Euler(0, 90, 0); // this adds a 90 degrees Y rotation
+            // transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
+            transform.LookAt(lookPos);
+            if (tracker != null)
+            {
+                var tracker_positioin = tracker.transform.position;
+                transform.position = new Vector3(position.x, tracker_positioin.y, position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(position.x, 0.0f, position.z);
+            }
         }
         else
         {
@@ -50,6 +64,16 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (tracker != null)
             {
+                var camera_position = parent_camera.transform.position;
+                var tracker_positioin = tracker.transform.position;
+                var lookPos = camera_position - transform.position;
+                lookPos.y = 0;
+                var rotation = Quaternion.LookRotation(lookPos);
+                // rotation *= Quaternion.Euler(0, 90, 0); // this adds a 90 degrees Y rotation
+                // transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
+                transform.LookAt(lookPos);
+                transform.position = new Vector3(position.x, tracker_positioin.y, position.z);
+
                 position = transform.position - tracker.transform.position;
             }
             else

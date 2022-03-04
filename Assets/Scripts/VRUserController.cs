@@ -26,12 +26,13 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
             parent_camera = GameObject.Find("CenterEyeAnchor");
             if (parent_camera != null)
             {
-                var position = parent_camera.transform.position;
-                var lookPos = position - transform.position;
+                var camera_position = parent_camera.transform.position;
+                var lookPos = camera_position - transform.position;
                 lookPos.y = 0;
-                var rotation = Quaternion.LookRotation(lookPos);
+                // var rotation = Quaternion.LookRotation(lookPos);
                 // rotation *= Quaternion.Euler(0, 90, 0); // this adds a 90 degrees Y rotation
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
+                // transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
+                transform.LookAt(lookPos);
                 transform.position = new Vector3(position.x, 0.0f, position.z);
             }
         }
