@@ -38,11 +38,11 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
             if (tracker != null)
             {
                 var tracker_positioin = tracker.transform.position;
-                transform.position = new Vector3(position.x, tracker_positioin.y, position.z);
+                transform.position = new Vector3(camera_position.x, tracker_positioin.y, camera_position.z);
             }
             else
             {
-                transform.position = new Vector3(position.x, 0.0f, position.z);
+                transform.position = new Vector3(camera_position.x, 0.0f, camera_position.z);
             }
         }
         else
@@ -68,11 +68,11 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
                 var tracker_positioin = tracker.transform.position;
                 var lookPos = camera_position - transform.position;
                 lookPos.y = 0;
-                var rotation = Quaternion.LookRotation(lookPos);
+                // var rotation = Quaternion.LookRotation(lookPos);
                 // rotation *= Quaternion.Euler(0, 90, 0); // this adds a 90 degrees Y rotation
                 // transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
                 transform.LookAt(lookPos);
-                transform.position = new Vector3(position.x, tracker_positioin.y, position.z);
+                transform.position = new Vector3(camera_position.x, tracker_positioin.y, camera_position.z);
 
                 position = transform.position - tracker.transform.position;
             }

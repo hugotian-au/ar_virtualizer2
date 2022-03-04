@@ -19,8 +19,8 @@ MonoBehaviour:
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: 
-    Server: 192.168.1.161
+    FixedRegion: au
+    Server: 
     Port: 0
     ProxyServer: 
     Protocol: 0
