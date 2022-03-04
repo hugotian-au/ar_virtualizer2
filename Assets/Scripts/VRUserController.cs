@@ -7,7 +7,7 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
 {
     #region Private Fields
     // Find the Main Camera's position
-    private GameObject parent;
+    private GameObject parent_camera;
     private Vector3 position = new Vector3(0, 0, 0);
     private Vector3 prevPosition = new Vector3(0.0f, 0.0f, 0.0f);
     private Animator animator;
@@ -23,12 +23,17 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            parent = GameObject.Find("CenterEyeAnchor");
-            if (parent != null)
+            parent_camera = GameObject.Find("CenterEyeAnchor");
+            if (parent_camera != null)
             {
-                transform.parent = parent.transform;
+                var position = parent_camera.transform.position;
+                var lookPos = position - transform.position;
+                lookPos.y = 0;
+                var rotation = Quaternion.LookRotation(lookPos);
+                // rotation *= Quaternion.Euler(0, 90, 0); // this adds a 90 degrees Y rotation
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
+                transform.position = new Vector3(position.x, 0.0f, position.z);
             }
-            transform.localPosition = new Vector3(0.0f, -1.8f, 0.0f);
         }
         else
         {
@@ -47,13 +52,23 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (photonView.IsMine)
         {
-            position = transform.position;  // Use the world position since the localPosition is not changed
+            var camera_position = parent_camera.transform.position;
+            var lookPos = camera_position - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            // rotation *= Quaternion.Euler(0, 90, 0); // this adds a 90 degrees Y rotation
+            // transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime*2);
+            //transform.rotation = rotation;
+            transform.LookAt(lookPos);
+            transform.position = new Vector3(camera_position.x, 0.0f, camera_position.z);
+
+            position = transform.localPosition;  // Use the world position since the localPosition is not changed
         }
         else
         {
             Vector3 diff = position - prevPosition;
             // anim.SetFloat("VerticalMov", Input.GetAxis("Vertical"));
-            if (diff.x > 0.1f || diff.z > 0.1f || diff.x < -0.1f || diff.z < -0.1f)
+            if (diff.x > 0.05f || diff.z > 0.05f || diff.x < -0.05f || diff.z < -0.05f)
             {
                 var new_position = new Vector3(position.x, 0, position.z);
                 transform.LookAt(new_position);
