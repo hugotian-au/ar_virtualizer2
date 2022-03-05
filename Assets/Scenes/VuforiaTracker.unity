@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 935707250}
   - component: {fileID: 935707255}
   - component: {fileID: 935707254}
+  - component: {fileID: 935707253}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -327,6 +328,29 @@ Transform:
   m_Father: {fileID: 552323458}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &935707253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935707249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf98dd1206224111a38765365e98e207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockCursorWhenFocusLocked: 1
+  setCursorInvisibleWhenFocusLocked: 0
+  maxGazeCollisionDistance: 10
+  raycastLayerMasks:
+  - serializedVersion: 2
+    m_Bits: 4294967291
+  stabilizer:
+    storedStabilitySamples: 60
+  gazeTransform: {fileID: 0}
+  minHeadVelocityThreshold: 0.5
+  maxHeadVelocityThreshold: 2
 --- !u!114 &935707254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,13 +385,13 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
---- !u!43 &1294660649
+--- !u!43 &948836832
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ImageTargetMesh43864
+  m_Name: ImageTargetMesh53594
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -524,7 +548,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!21 &1536124531
+--- !u!21 &1208106470
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -533,7 +557,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: 'OxygenMaterial
 
-    43876'
+    42222'
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -638,7 +662,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754436755}
-  m_Mesh: {fileID: 1294660649}
+  m_Mesh: {fileID: 948836832}
 --- !u!23 &1754436758
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -657,7 +681,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1536124531}
+  - {fileID: 1208106470}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

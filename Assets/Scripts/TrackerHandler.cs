@@ -33,6 +33,7 @@ public class TrackerHandler : MonoBehaviour
         {
             origin_position = pos;
             transform.localPosition = origin_position;
+            transform.localRotation = marker.transform.localRotation;
             // child.transform.localPosition = Vector3.zero;
             // child.transform.position = origin_position;
             // Attach world anchor.

@@ -26,6 +26,7 @@ public class FindImageTargetPosition : MonoBehaviour
             {
                 origin_position = pos;
                 transform.localPosition = origin_position;
+                transform.localRotation = marker.transform.localRotation;
             }
             print("origin_position is: " + origin_position);
         }
