@@ -15,6 +15,12 @@ GameObject:
   - component: {fileID: 3502270441347269320}
   - component: {fileID: 5853050225710230247}
   - component: {fileID: 5192190120389511082}
+  - component: {fileID: 590348429329178236}
+  - component: {fileID: 7221603748740843455}
+  - component: {fileID: 6185110134049133936}
+  - component: {fileID: 1014709894223802223}
+  - component: {fileID: 4895497210644744014}
+  - component: {fileID: 6074895813735128397}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -94,8 +100,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.695608, y: 1.4290481, z: 0.875849}
-  m_Center: {x: -0.068102, y: 0.719067, z: -0.0041714907}
+  m_Size: {x: 0.695608, y: 0.74297976, z: 0.875849}
+  m_Center: {x: -0.068102, y: 0.37603283, z: -0.0041714907}
 --- !u!54 &3502270441347269320
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,6 +157,146 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &590348429329178236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802243491359423240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98de877dee5fc341b4eb59dfdab266c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoConstraintSelection: 1
+  selectedConstraints: []
+--- !u!114 &7221603748740843455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802243491359423240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181cd563a8349c34ea8978b0bc8d9c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostTransform: {fileID: 5364463566468081715}
+  manipulationType: 3
+  twoHandedManipulationType: 7
+  allowFarManipulation: 1
+  useForcesForNearManipulation: 1
+  oneHandRotationModeNear: 1
+  oneHandRotationModeFar: 1
+  releaseBehavior: 3
+  smoothingFar: 1
+  smoothingNear: 1
+  moveLerpTime: 0.001
+  rotateLerpTime: 0.001
+  scaleLerpTime: 0.001
+  enableConstraints: 1
+  constraintsManager: {fileID: 590348429329178236}
+  elasticsManager: {fileID: 4895497210644744014}
+  onManipulationStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6074895813735128397}
+        m_MethodName: OnHandTouchEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onManipulationEnded:
+    m_PersistentCalls:
+      m_Calls: []
+  onHoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onHoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &6185110134049133936
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802243491359423240}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.24655092, y: 0.68070483, z: 0.875849}
+  m_Center: {x: 0.15642655, y: 1.0932386, z: -0.0041714907}
+--- !u!114 &1014709894223802223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802243491359423240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5afd5316c63705643b3daba5a6e923bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTetherWhenManipulating: 1
+  IsBoundsHandles: 0
+--- !u!114 &4895497210644744014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802243491359423240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49eebbfcc03829f4ebed61c2617da0fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationElasticConfigurationObject: {fileID: 0}
+  rotationElasticConfigurationObject: {fileID: 0}
+  scaleElasticConfigurationObject: {fileID: 0}
+  translationElasticExtent:
+    StretchBounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    UseBounds: 0
+    SnapPoints: []
+    RepeatSnapPoints: 0
+    SnapRadius: 0
+  rotationElasticExtent:
+    SnapPoints: []
+    RepeatSnapPoints: 0
+    SnapRadius: 0
+  scaleElasticExtent:
+    StretchBounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
+    UseBounds: 0
+    SnapPoints: []
+    RepeatSnapPoints: 0
+    SnapRadius: 0
+  elasticTypes: 0
+--- !u!114 &6074895813735128397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3802243491359423240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4b419f843a2dc4c910828a81a23ee2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5280896826347062225
 GameObject:
   m_ObjectHideFlags: 0
