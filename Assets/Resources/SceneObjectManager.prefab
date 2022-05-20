@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4138663536667069099}
   - component: {fileID: 3131189116222710382}
-  - component: {fileID: -8038870998755617501}
+  - component: {fileID: 7939247457684278197}
   m_Layer: 0
   m_Name: SceneObjectManager
   m_TagString: Untagged
@@ -54,7 +54,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-8038870998755617501
+--- !u!114 &7939247457684278197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,8 +63,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6920349427499508837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 975fa3a50a1a59244baa7f0ea7d5900e, type: 3}
+  m_Script: {fileID: 11500000, guid: a1dd2ff10c4aa4b488472ea119ac6215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneObject1: {fileID: 5280896826347062225, guid: bba9c2d00ebc00442aac4e9664ab65da,
+  sceneBlock1: {fileID: 5536777874493928408, guid: b11e87b4009f6df4fb5573f30bff5d20,
+    type: 3}
+  sceneBlock2: {fileID: 4324434754907502467, guid: a3c79af2f07ad9849bda6a47c8076b80,
+    type: 3}
+  sceneBlock3: {fileID: 5455337295979577927, guid: 1ad8f6a0d9c61664bb0d0c49e68caf17,
+    type: 3}
+  sceneBlock4: {fileID: 6833900944958857730, guid: d70887c416122094080a1772aee8ea72,
+    type: 3}
+  sceneBlock5: {fileID: 1784253004058983059, guid: 2cc68e2ca02362943b8fba3e436000a9,
+    type: 3}
+  sceneBlock6: {fileID: 2903744615275991916, guid: 50604d0e0b9095542b1dcec860ba82e7,
+    type: 3}
+  sceneBlock7: {fileID: 6449823862975024535, guid: 62e75081558d8974abaa32c4a381686e,
     type: 3}

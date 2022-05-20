@@ -14,6 +14,8 @@ public class MySceneObjectController : MonoBehaviourPunCallbacks, IPunObservable
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        position = rb.position;
+        rotation = rb.rotation;
     }
 
     // Update is called once per frame
