@@ -41,7 +41,10 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
         else
         {
             tracker = GameObject.Find("TrackerHandler");
-            relativeCameraPos = transform.position - tracker.transform.position;
+            if (tracker != null)
+            {
+                relativeCameraPos = transform.position - tracker.transform.position;
+            }
             animator = GetComponent<Animator>();
             if (!animator)
             {
@@ -72,24 +75,27 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
         else
         {
             Vector3 diff = position - prevPosition;
-            // anim.SetFloat("VerticalMov", Input.GetAxis("Vertical"));
-            if (diff.x > 0.05f || diff.z > 0.05f || diff.x < -0.05f || diff.z < -0.05f)
+            if (tracker != null)
             {
-                var new_position = new Vector3(position.x, 0, position.z);
-                var lookat_pos = new Vector3(position.x, tracker.transform.position.y, position.z);
-                transform.LookAt(lookat_pos);
-                transform.localPosition = new_position;
-                // animator.SetFloat("VerticalMov", 0.2f);
-                animator.SetFloat("Speed", 0.3f);
-                // animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
-            }
-            else
-            {
-                var new_position = new Vector3(position.x, 0, position.z);
-                var lookat_pos = new Vector3(position.x, tracker.transform.position.y, position.z);
-                transform.LookAt(lookat_pos);
-                transform.localPosition = new_position;
-                animator.SetFloat("Speed", 0.0f);
+                // anim.SetFloat("VerticalMov", Input.GetAxis("Vertical"));
+                if (diff.x > 0.05f || diff.z > 0.05f || diff.x < -0.05f || diff.z < -0.05f)
+                {
+                    var new_position = new Vector3(position.x, 0, position.z);
+                    var lookat_pos = new Vector3(position.x, tracker.transform.position.y, position.z);
+                    transform.LookAt(lookat_pos);
+                    transform.localPosition = new_position;
+                    // animator.SetFloat("VerticalMov", 0.2f);
+                    animator.SetFloat("Speed", 0.3f);
+                    // animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
+                }
+                else
+                {
+                    var new_position = new Vector3(position.x, 0, position.z);
+                    var lookat_pos = new Vector3(position.x, tracker.transform.position.y, position.z);
+                    transform.LookAt(lookat_pos);
+                    transform.localPosition = new_position;
+                    animator.SetFloat("Speed", 0.0f);
+                }
             }
             // anim.SetFloat("HorizontalMov", Input.GetAxis("Horizontal"));
 
