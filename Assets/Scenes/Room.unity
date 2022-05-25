@@ -279,6 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 669570822}
   - component: {fileID: 669570821}
+  - component: {fileID: 669570823}
   m_Layer: 0
   m_Name: VRDrawRight
   m_TagString: Untagged
@@ -322,6 +323,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &669570823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669570820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f8667a759bb4708aa2e0defb06b5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlHand: 2
+  objectToTrackMovement: {fileID: 0}
+  minDistanceBeforeNewPoint: 0.2
+  minDrawingPressure: 0.8
+  lineDefaultWidth: 0.01
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  editorObjectToTrackMovement: {fileID: 0}
+  allowEditorControls: 1
 --- !u!1 &777544875
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,6 +710,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223784159}
   - component: {fileID: 1223784158}
+  - component: {fileID: 1223784160}
   m_Layer: 0
   m_Name: VRDrawLeft
   m_TagString: Untagged
@@ -732,6 +754,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1223784160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223784157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f8667a759bb4708aa2e0defb06b5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlHand: 1
+  objectToTrackMovement: {fileID: 0}
+  minDistanceBeforeNewPoint: 0.2
+  minDrawingPressure: 0.8
+  lineDefaultWidth: 0.01
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  editorObjectToTrackMovement: {fileID: 0}
+  allowEditorControls: 1
 --- !u!1 &1468086363
 GameObject:
   m_ObjectHideFlags: 0

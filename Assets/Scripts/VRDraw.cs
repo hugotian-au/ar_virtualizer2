@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using DilmerGames.Enums;
 using DilmerGames.Core.Utilities;
-using Photon.Pun;
 
 namespace DilmerGames
 {
-    public class VRDraw : MonoBehaviourPunCallbacks, IPunObservable
+    public class VRDraw : MonoBehaviour
     {   
         [SerializeField]
         private ControlHand controlHand = ControlHand.NoSet;
@@ -54,7 +53,7 @@ namespace DilmerGames
 
             #endif
 
-            AddNewLineRenderer();
+            //AddNewLineRenderer();
         }
 
         void AddNewLineRenderer()
@@ -83,24 +82,24 @@ namespace DilmerGames
             if(controlHand == ControlHand.Left/* && OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > minDrawingPressure*/)
             {
                 //VRStats.Instance.firstText.text = $"Axis1D.PrimaryIndexTrigger: {OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger)}";
-                UpdateLine();
+                //UpdateLine();
             }
             else if(controlHand == ControlHand.Left /*&& OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger)*/)
             {
                 //VRStats.Instance.secondText.text = $"Button.PrimaryIndexTrigger: {Time.deltaTime}";
-                AddNewLineRenderer();
+                //AddNewLineRenderer();
             }
 
             // secondary right controller
             if(controlHand == ControlHand.Right /*&& OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > minDrawingPressure*/)
             {
                 //VRStats.Instance.firstText.text = $"Axis1D.SecondaryIndexTrigger: {OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger)}";
-                UpdateLine();
+                //UpdateLine();
             }
             else if(controlHand == ControlHand.Right /*&& OVRInput.GetUp(OVRInput.Button.SecondaryIndexTrigger)*/)
             {
                 //VRStats.Instance.secondText.text = $"Button.SecondaryIndexTrigger: {Time.deltaTime}";
-                AddNewLineRenderer();
+                //AddNewLineRenderer();
             }
 
     //#endif
@@ -183,20 +182,6 @@ namespace DilmerGames
         public void UpdateLineMinDistance(float newValue)
         {
             minDistanceBeforeNewPoint = newValue;
-        }
-
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            if (stream.IsWriting)
-            {
-                stream.SendNext(prevPointDistance);
-                //stream.SendNext(rotation);
-            }
-            else
-            {
-                prevPointDistance = (Vector3)stream.ReceiveNext();
-                //rotation = (Quaternion)stream.ReceiveNext();
-            }
         }
     }
 }
