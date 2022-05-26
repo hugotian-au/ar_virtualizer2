@@ -8,11 +8,19 @@ namespace DilmerGames
 {
     public class VRDraw : MonoBehaviourPunCallbacks, IPunObservable
     {
-        private int current_index = 0;
+        private int current_index = 1;
+        private int previous_index = 0;
         private Vector3 trackPosition;
+        private Vector3 previous_trackPosition;
         private int numCapVectices;
+        private int previous_numCapVectices;
         private Vector3 linePosition;
+        private Vector3 previousLinePosition;
         private Vector3 cameraPosition;
+        private Vector3 previousCameraPosition;
+
+        private bool newLine = false;
+        private bool updateLine = false;
 
         [SerializeField]
         private ControlHand controlHand = ControlHand.NoSet;
@@ -24,14 +32,17 @@ namespace DilmerGames
 
         [SerializeField, Range(0, 1.0f)]
         private float minDistanceBeforeNewPoint = 0.2f;
+        private float previousMinDistanceBeforeNewPoint = 0.2f;
 
         [SerializeField, Range(0, 1.0f)]
         private float minDrawingPressure = 0.8f;
 
         [SerializeField, Range(0, 1.0f)]
         private float lineDefaultWidth = 0.010f;
+        private float previousLineWidth = 0.010f;
 
         private int positionCount = 0; // 2 by default
+        private int previousPositionCount = 0;
 
         private List<LineRenderer> lines = new List<LineRenderer>();
 
@@ -58,7 +69,7 @@ namespace DilmerGames
                 var trackObject = GameObject.Find("ARContent");
                 objectToTrackMovement = trackObject;
             }
-            AddNewLineRenderer();
+            // AddNewLineRenderer();
         }
 
         void AddNewLineRenderer()
@@ -70,7 +81,7 @@ namespace DilmerGames
             LineRenderer goLineRenderer = go.AddComponent<LineRenderer>();
             goLineRenderer.startWidth = lineDefaultWidth;
             goLineRenderer.endWidth = lineDefaultWidth;
-            goLineRenderer.useWorldSpace = true;
+            goLineRenderer.useWorldSpace = false;
             goLineRenderer.material = MaterialUtils.CreateMaterial(defaultColor, $"Material_{controlHand.ToString()}_{lines.Count}");
             goLineRenderer.positionCount = 1;
             goLineRenderer.numCapVertices = 90;
@@ -82,74 +93,64 @@ namespace DilmerGames
 
         void Update()
         {
-    //#if !UNITY_EDITOR
             // primary left controller
-            if(controlHand == ControlHand.Left/* && OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) > minDrawingPressure*/)
+            if(controlHand == ControlHand.Left && updateLine)
             {
                 //VRStats.Instance.firstText.text = $"Axis1D.PrimaryIndexTrigger: {OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger)}";
-                //UpdateLine();
+                UpdateLine();
+                updateLine = false;
+
+                previous_trackPosition = trackPosition;
+                previousLineWidth = lineDefaultWidth;
+                previousPositionCount = positionCount;
+                previous_numCapVectices = numCapVectices;
+                previousLinePosition = linePosition;
+                previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
+                previousCameraPosition = cameraPosition;
             }
-            else if(controlHand == ControlHand.Left /*&& OVRInput.GetUp(OVRInput.Button.PrimaryIndexTrigger)*/)
+            else if(controlHand == ControlHand.Left && newLine)
             {
                 //VRStats.Instance.secondText.text = $"Button.PrimaryIndexTrigger: {Time.deltaTime}";
-                //AddNewLineRenderer();
+                AddNewLineRenderer();
+                newLine = false;
+                previous_index = current_index;
             }
 
             // secondary right controller
-            if(controlHand == ControlHand.Right /*&& OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) > minDrawingPressure*/)
+            if(controlHand == ControlHand.Right && updateLine)
             {
                 //VRStats.Instance.firstText.text = $"Axis1D.SecondaryIndexTrigger: {OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger)}";
-                //UpdateLine();
+                UpdateLine();
+                updateLine = false;
+                previous_trackPosition = trackPosition;
+                previousLineWidth = lineDefaultWidth;
+                previousPositionCount = positionCount;
+                previous_numCapVectices = numCapVectices;
+                previousLinePosition = linePosition;
+                previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
+                previousCameraPosition = cameraPosition;
             }
-            else if(controlHand == ControlHand.Right /*&& OVRInput.GetUp(OVRInput.Button.SecondaryIndexTrigger)*/)
+            else if(controlHand == ControlHand.Right && newLine)
             {
                 //VRStats.Instance.secondText.text = $"Button.SecondaryIndexTrigger: {Time.deltaTime}";
-                //AddNewLineRenderer();
-            }
-
-    //#endif
-/*
-    #if UNITY_EDITOR
-            if(!allowEditorControls) return;
-
-            // left controller
-            if(controlHand == ControlHand.Left && Input.GetKey(KeyCode.K))
-            {
-                VRStats.Instance.firstText.text = $"Input.GetKey(KeyCode.K) {Input.GetKey(KeyCode.K)}";
-                UpdateLine();
-            }
-            else if(controlHand == ControlHand.Left && Input.GetKeyUp(KeyCode.K))
-            {
-                VRStats.Instance.secondText.text = $"Input.GetKeyUp(KeyCode.K) {Input.GetKeyUp(KeyCode.K)}";
                 AddNewLineRenderer();
+                newLine = false;
+                previous_index = current_index;
             }
 
-            // right controller
-            if(controlHand == ControlHand.Right && Input.GetKey(KeyCode.L))
-            {
-                VRStats.Instance.firstText.text = $"Input.GetKey(KeyCode.L): {Input.GetKey(KeyCode.L)}";
-                UpdateLine();
-            }
-            else if(controlHand == ControlHand.Right && Input.GetKeyUp(KeyCode.L))
-            {
-                VRStats.Instance.secondText.text = $"Input.GetKeyUp(KeyCode.L): {Input.GetKeyUp(KeyCode.L)}";
-                AddNewLineRenderer();
-            }
-    #endif
-*/
         }
 
         void UpdateLine()
         {
             if(prevPointDistance == null)
             {
-                prevPointDistance = objectToTrackMovement.transform.position;
+                prevPointDistance = trackPosition;
             }
 
-            if(prevPointDistance != null && Mathf.Abs(Vector3.Distance(prevPointDistance, objectToTrackMovement.transform.position)) >= minDistanceBeforeNewPoint)
+            if(prevPointDistance != null && Mathf.Abs(Vector3.Distance(prevPointDistance, trackPosition)) >= minDistanceBeforeNewPoint)
             {
-                Vector3 dir = (objectToTrackMovement.transform.position - Camera.main.transform.position).normalized;
-                prevPointDistance = objectToTrackMovement.transform.position;
+                Vector3 dir = (trackPosition - Camera.main.transform.position).normalized;
+                prevPointDistance = trackPosition;
                 AddPoint(prevPointDistance, dir);
             }
         }
@@ -211,8 +212,24 @@ namespace DilmerGames
                 positionCount = (int)stream.ReceiveNext();
                 numCapVectices = (int)stream.ReceiveNext();
                 linePosition = (Vector3)stream.ReceiveNext();
+                cameraPosition = (Vector3)stream.ReceiveNext();
                 //defaultColor = (Color)stream.ReceiveNext();
                 minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
+
+                if (previous_index != current_index)
+                {
+                    newLine = true;
+                }
+                else if((trackPosition != previous_trackPosition) ||
+                        (lineDefaultWidth != previousLineWidth) ||
+                        (positionCount != previousPositionCount) ||
+                        (numCapVectices != previous_numCapVectices) ||
+                        (linePosition != previousLinePosition) ||
+                        (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint) ||
+                        (cameraPosition != previousCameraPosition))
+                {
+                    updateLine = true;
+                }
             }
         }
     }
