@@ -149,7 +149,7 @@ namespace DilmerGames
 
             if(prevPointDistance != null && Mathf.Abs(Vector3.Distance(prevPointDistance, trackPosition)) >= minDistanceBeforeNewPoint)
             {
-                Vector3 dir = (trackPosition - Camera.main.transform.position).normalized;
+                Vector3 dir = (trackPosition - cameraPosition).normalized;
                 prevPointDistance = trackPosition;
                 AddPoint(prevPointDistance, dir);
             }
