@@ -220,13 +220,13 @@ namespace DilmerGames
                 {
                     newLine = true;
                 }
-                else if((trackPosition != previous_trackPosition) ||
-                        (lineDefaultWidth != previousLineWidth) ||
-                        (positionCount != previousPositionCount) ||
-                        (numCapVectices != previous_numCapVectices) ||
-                        (linePosition != previousLinePosition) ||
-                        (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint) ||
-                        (cameraPosition != previousCameraPosition))
+                if((trackPosition != previous_trackPosition) ||
+                    (lineDefaultWidth != previousLineWidth) ||
+                    (positionCount != previousPositionCount) ||
+                    (numCapVectices != previous_numCapVectices) ||
+                    (linePosition != previousLinePosition) ||
+                    (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint) ||
+                    (cameraPosition != previousCameraPosition))
                 {
                     updateLine = true;
                 }

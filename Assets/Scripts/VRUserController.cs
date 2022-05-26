@@ -45,6 +45,10 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
             {
                 relativeCameraPos = transform.position - tracker.transform.position;
             }
+            else
+            {
+                tracker = GameObject.Find("ARContent");
+            }
             animator = GetComponent<Animator>();
             if (!animator)
             {
@@ -78,22 +82,28 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
             if (tracker != null)
             {
                 // anim.SetFloat("VerticalMov", Input.GetAxis("Vertical"));
-                if (diff.x > 0.05f || diff.z > 0.05f || diff.x < -0.05f || diff.z < -0.05f)
+                if (diff.x > 0.01f || diff.z > 0.01f || diff.x < -0.01f || diff.z < -0.01f)
                 {
-                    var new_position = new Vector3(position.x, 0, position.z);
+                    var new_position = new Vector3(position.x - 0.221f, 0, position.z + 0.486f);
                     var lookat_pos = new Vector3(position.x, tracker.transform.position.y, position.z);
+                    //var lookat_pos = diff;
                     transform.LookAt(lookat_pos);
                     transform.localPosition = new_position;
+                    // Quaternion rotation = Quaternion.LookRotation(new_position, new Vector3(0, 1, 0));
+                    // transform.localRotation = rotation * Quaternion.Euler(0, 90, 0);
                     // animator.SetFloat("VerticalMov", 0.2f);
                     animator.SetFloat("Speed", 0.3f);
                     // animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
                 }
                 else
                 {
-                    var new_position = new Vector3(position.x, 0, position.z);
+                    var new_position = new Vector3(position.x - 0.221f, 0, position.z + 0.486f);
                     var lookat_pos = new Vector3(position.x, tracker.transform.position.y, position.z);
+                    // var lookat_pos = diff;
                     transform.LookAt(lookat_pos);
                     transform.localPosition = new_position;
+                    // Quaternion rotation = Quaternion.LookRotation(new_position, new Vector3(0, 1, 0));
+                    // transform.localRotation = rotation * Quaternion.Euler(0, 90, 0);
                     animator.SetFloat("Speed", 0.0f);
                 }
             }

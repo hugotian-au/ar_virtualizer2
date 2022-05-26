@@ -50,7 +50,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 1
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 8085243849558317045}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -73,4 +74,4 @@ MonoBehaviour:
   lineDefaultWidth: 0.01
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   editorObjectToTrackMovement: {fileID: 0}
-  allowEditorControls: 1
+  allowEditorControls: 0
