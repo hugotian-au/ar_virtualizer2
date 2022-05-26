@@ -10,6 +10,8 @@ public class MyPlayerManager : MonoBehaviourPunCallbacks
     public GameObject localPlayerPrefab;
     public GameObject remotePlayerPrefab;
     public GameObject SceneObjectManPrefab;
+    public GameObject vrdrawLeftPrefab;
+    public GameObject vrdrawRightPrefab;
 
     // Start is called before the first frame update
     void Start()

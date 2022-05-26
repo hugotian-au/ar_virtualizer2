@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using DilmerGames.Enums;
 using DilmerGames.Core.Utilities;
+using Photon.Pun;
 
 namespace DilmerGames
 {
-    public class VRDraw : MonoBehaviour
+    public class VRDraw : MonoBehaviourPunCallbacks, IPunObservable
     {   
         [SerializeField]
         private ControlHand controlHand = ControlHand.NoSet;
@@ -182,6 +183,20 @@ namespace DilmerGames
         public void UpdateLineMinDistance(float newValue)
         {
             minDistanceBeforeNewPoint = newValue;
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                stream.SendNext(prevPointDistance);
+                // stream.SendNext(rotation);
+            }
+            else
+            {
+                // prevPointDistance = (Vector3)stream.ReceiveNext();
+                // rotation = (Quaternion)stream.ReceiveNext();
+            }
         }
     }
 }
