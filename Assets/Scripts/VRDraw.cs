@@ -83,7 +83,7 @@ namespace DilmerGames
             goLineRenderer.endWidth = lineDefaultWidth;
             goLineRenderer.useWorldSpace = false;
             goLineRenderer.material = MaterialUtils.CreateMaterial(defaultColor, $"Material_{controlHand.ToString()}_{lines.Count}");
-            goLineRenderer.positionCount = 1;
+            goLineRenderer.positionCount = 2;
             goLineRenderer.numCapVertices = 90;
             goLineRenderer.SetPosition(0, objectToTrackMovement.transform.position);
 
