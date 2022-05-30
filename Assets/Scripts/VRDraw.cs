@@ -19,6 +19,8 @@ namespace DilmerGames
         private Vector3 cameraPosition;
         private Vector3 previousCameraPosition;
 
+        private Vector3 offPosition = new Vector3(0.221f, 0.0f, -0.486f);
+
         private int position_number = 0;
 
         private bool newLine = false;
@@ -69,12 +71,12 @@ namespace DilmerGames
         {
             positionCount = 0;
             GameObject go = new GameObject($"LineRenderer_{controlHand.ToString()}_{lines.Count}");
-            go.transform.parent = objectToTrackMovement.transform.parent;
+            go.transform.parent = objectToTrackMovement.transform;
             go.transform.position = trackPosition;
             LineRenderer goLineRenderer = go.AddComponent<LineRenderer>();
             goLineRenderer.startWidth = lineDefaultWidth;
             goLineRenderer.endWidth = lineDefaultWidth;
-            goLineRenderer.useWorldSpace = false;
+            goLineRenderer.useWorldSpace = true;
             goLineRenderer.material = MaterialUtils.CreateMaterial(defaultColor, $"Material_{controlHand.ToString()}_{lines.Count}");
             goLineRenderer.positionCount = 1;
             goLineRenderer.numCapVertices = 90;
@@ -211,7 +213,7 @@ namespace DilmerGames
                 cameraPosition = (Vector3)stream.ReceiveNext();
                 // defaultColor = (Color)stream.ReceiveNext();
                 minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
-                trackPosition = linePosition;
+                trackPosition = linePosition - offPosition;
 
                 if (previous_index != current_index)
                 {
