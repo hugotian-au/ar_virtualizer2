@@ -224,7 +224,7 @@ namespace DilmerGames
                     position_number = 0;
                     print("Begin a new line");
                 }
-                if((trackPosition != previous_trackPosition) ||
+                if (/*(trackPosition != previous_trackPosition) ||*/
                     (lineDefaultWidth != previousLineWidth) ||
                     /*(positionCount != previousPositionCount) ||
                     (numCapVectices != previous_numCapVectices) ||*/
