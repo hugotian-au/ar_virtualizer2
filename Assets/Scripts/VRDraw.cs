@@ -40,7 +40,7 @@ namespace DilmerGames
         private float lineDefaultWidth = 0.010f;
         private float previousLineWidth = 0.010f;
 
-        private int positionCount = 1; // 2 by default
+        private int positionCount = 0; // 2 by default
         private int previousPositionCount = 0;
 
         private List<LineRenderer> lines = new List<LineRenderer>();
@@ -67,6 +67,7 @@ namespace DilmerGames
 
         void AddNewLineRenderer()
         {
+            positionCount = 0;
             GameObject go = new GameObject($"LineRenderer_{controlHand.ToString()}_{lines.Count}");
             go.transform.parent = objectToTrackMovement.transform.parent;
             go.transform.position = trackPosition;
@@ -75,13 +76,12 @@ namespace DilmerGames
             goLineRenderer.endWidth = lineDefaultWidth;
             goLineRenderer.useWorldSpace = false;
             goLineRenderer.material = MaterialUtils.CreateMaterial(defaultColor, $"Material_{controlHand.ToString()}_{lines.Count}");
-            goLineRenderer.positionCount = 2;
+            goLineRenderer.positionCount = 1;
             goLineRenderer.numCapVertices = 90;
             goLineRenderer.SetPosition(0, trackPosition);
 
             currentLineRender = goLineRenderer;
             lines.Add(goLineRenderer);
-            positionCount = 1;
         }
 
         void Update()
