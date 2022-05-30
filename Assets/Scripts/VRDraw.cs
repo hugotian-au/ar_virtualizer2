@@ -81,6 +81,7 @@ namespace DilmerGames
 
             currentLineRender = goLineRenderer;
             lines.Add(goLineRenderer);
+            positionCount = 1;
         }
 
         void Update()
