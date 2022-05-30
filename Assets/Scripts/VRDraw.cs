@@ -69,7 +69,7 @@ namespace DilmerGames
         {
             GameObject go = new GameObject($"LineRenderer_{controlHand.ToString()}_{lines.Count}");
             go.transform.parent = objectToTrackMovement.transform.parent;
-            go.transform.position = objectToTrackMovement.transform.position;
+            go.transform.position = trackPosition;
             LineRenderer goLineRenderer = go.AddComponent<LineRenderer>();
             goLineRenderer.startWidth = lineDefaultWidth;
             goLineRenderer.endWidth = lineDefaultWidth;
@@ -77,7 +77,7 @@ namespace DilmerGames
             goLineRenderer.material = MaterialUtils.CreateMaterial(defaultColor, $"Material_{controlHand.ToString()}_{lines.Count}");
             goLineRenderer.positionCount = 2;
             goLineRenderer.numCapVertices = 90;
-            goLineRenderer.SetPosition(0, objectToTrackMovement.transform.position);
+            goLineRenderer.SetPosition(0, trackPosition);
 
             currentLineRender = goLineRenderer;
             lines.Add(goLineRenderer);
@@ -140,7 +140,7 @@ namespace DilmerGames
                 prevPointDistance = trackPosition;
             }
 
-            if(prevPointDistance != null && Mathf.Abs(Vector3.Distance(prevPointDistance, trackPosition)) >= minDistanceBeforeNewPoint)
+            if(prevPointDistance != null)
             {
                 Vector3 dir = (trackPosition - cameraPosition).normalized;
                 prevPointDistance = trackPosition;
