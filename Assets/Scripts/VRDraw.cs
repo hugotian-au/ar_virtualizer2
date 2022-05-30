@@ -19,6 +19,8 @@ namespace DilmerGames
         private Vector3 cameraPosition;
         private Vector3 previousCameraPosition;
 
+        private int position_number = 0;
+
         private bool newLine = false;
         private bool updateLine = false;
 
@@ -30,18 +32,15 @@ namespace DilmerGames
 
         private Vector3 prevPointDistance = Vector3.zero;
 
-        [SerializeField, Range(0, 1.0f)]
-        private float minDistanceBeforeNewPoint = 0.2f;
-        private float previousMinDistanceBeforeNewPoint = 0.2f;
+        private float minDistanceBeforeNewPoint = 0.01f;
+        private float previousMinDistanceBeforeNewPoint = 0.01f;
 
-        [SerializeField, Range(0, 1.0f)]
         private float minDrawingPressure = 0.8f;
 
-        [SerializeField, Range(0, 1.0f)]
         private float lineDefaultWidth = 0.010f;
         private float previousLineWidth = 0.010f;
 
-        private int positionCount = 0; // 2 by default
+        private int positionCount = 1; // 2 by default
         private int previousPositionCount = 0;
 
         private List<LineRenderer> lines = new List<LineRenderer>();
@@ -68,7 +67,6 @@ namespace DilmerGames
 
         void AddNewLineRenderer()
         {
-            positionCount = 0;
             GameObject go = new GameObject($"LineRenderer_{controlHand.ToString()}_{lines.Count}");
             go.transform.parent = objectToTrackMovement.transform.parent;
             go.transform.position = objectToTrackMovement.transform.position;
@@ -151,10 +149,13 @@ namespace DilmerGames
 
         void AddPoint(Vector3 position, Vector3 direction)
         {
+            print("current addded position is " + position);
+            print("positionCount is before setposition " + positionCount);
             currentLineRender.SetPosition(positionCount, position);
             positionCount++;
             currentLineRender.positionCount = positionCount + 1;
             currentLineRender.SetPosition(positionCount, position);
+            print("positionCount is " + positionCount);
             
             // send position
             // TCPControllerClient.Instance.UpdateLine(position);
@@ -189,7 +190,7 @@ namespace DilmerGames
             if (stream.IsWriting)
             {
                 stream.SendNext(current_index);
-                stream.SendNext(trackPosition);
+                // stream.SendNext(trackPosition);
                 stream.SendNext(lineDefaultWidth);
                 //stream.SendNext(positionCount);
                 //stream.SendNext(numCapVectices);
@@ -201,7 +202,7 @@ namespace DilmerGames
             else
             {
                 current_index = (int)stream.ReceiveNext();
-                trackPosition = (Vector3)stream.ReceiveNext();
+                // trackPosition = (Vector3)stream.ReceiveNext();
                 lineDefaultWidth = (float)stream.ReceiveNext();
                 // positionCount = (int)stream.ReceiveNext();
                 // numCapVectices = (int)stream.ReceiveNext();
@@ -209,6 +210,7 @@ namespace DilmerGames
                 cameraPosition = (Vector3)stream.ReceiveNext();
                 // defaultColor = (Color)stream.ReceiveNext();
                 minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
+                trackPosition = linePosition;
 
                 if (previous_index != current_index)
                 {
@@ -216,14 +218,15 @@ namespace DilmerGames
                     AddNewLineRenderer();
                     previous_index = current_index;
                     newLine = false;
+                    position_number = 0;
+                    print("Begin a new line");
                 }
                 if((trackPosition != previous_trackPosition) ||
                     (lineDefaultWidth != previousLineWidth) ||
                     /*(positionCount != previousPositionCount) ||
                     (numCapVectices != previous_numCapVectices) ||*/
                     (linePosition != previousLinePosition) ||
-                    (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint) ||
-                    (cameraPosition != previousCameraPosition))
+                    (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint))
                 {
                     updateLine = true;
                     UpdateLine();
@@ -234,10 +237,10 @@ namespace DilmerGames
                     // previous_numCapVectices = numCapVectices;
                     previousLinePosition = linePosition;
                     previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
-                    previousCameraPosition = cameraPosition;
-
-
-
+                    // previousCameraPosition = cameraPosition;
+                    position_number += 1;
+                    print("position_number is " + position_number);
+                    print("linePosition is " + linePosition);
 
 
                 }
