@@ -57,18 +57,12 @@ namespace DilmerGames
         [SerializeField]
         private bool allowEditorControls = true;
        
-        void Start()
+        void Awake()
         {
-            if (gameObject.name == "VRDrawLeft(Clone)")
-            {
-                var trackObject = GameObject.Find("ARContent");
-                objectToTrackMovement = trackObject;
-            }
-            if (gameObject.name == "VRDrawRight(Clone)")
-            {
-                var trackObject = GameObject.Find("ARContent");
-                objectToTrackMovement = trackObject;
-            }
+
+            var trackObject = GameObject.Find("ARContent");
+            objectToTrackMovement = trackObject;
+
             // AddNewLineRenderer();
         }
 
@@ -97,7 +91,7 @@ namespace DilmerGames
             if(controlHand == ControlHand.Left && updateLine)
             {
                 //VRStats.Instance.firstText.text = $"Axis1D.PrimaryIndexTrigger: {OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger)}";
-                UpdateLine();
+                // UpdateLine();
                 updateLine = false;
 
                 previous_trackPosition = trackPosition;
@@ -111,7 +105,7 @@ namespace DilmerGames
             else if(controlHand == ControlHand.Left && newLine)
             {
                 //VRStats.Instance.secondText.text = $"Button.PrimaryIndexTrigger: {Time.deltaTime}";
-                AddNewLineRenderer();
+                //AddNewLineRenderer();
                 newLine = false;
                 previous_index = current_index;
             }
@@ -120,7 +114,7 @@ namespace DilmerGames
             if(controlHand == ControlHand.Right && updateLine)
             {
                 //VRStats.Instance.firstText.text = $"Axis1D.SecondaryIndexTrigger: {OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger)}";
-                UpdateLine();
+                // UpdateLine();
                 updateLine = false;
                 previous_trackPosition = trackPosition;
                 previousLineWidth = lineDefaultWidth;
@@ -133,7 +127,7 @@ namespace DilmerGames
             else if(controlHand == ControlHand.Right && newLine)
             {
                 //VRStats.Instance.secondText.text = $"Button.SecondaryIndexTrigger: {Time.deltaTime}";
-                AddNewLineRenderer();
+                //AddNewLineRenderer();
                 newLine = false;
                 previous_index = current_index;
             }
@@ -195,40 +189,57 @@ namespace DilmerGames
             if (stream.IsWriting)
             {
                 stream.SendNext(current_index);
-                stream.SendNext(trackPosition);
-                stream.SendNext(lineDefaultWidth);
-                stream.SendNext(positionCount);
-                stream.SendNext(numCapVectices);
+                //stream.SendNext(trackPosition);
+                //stream.SendNext(lineDefaultWidth);
+                //stream.SendNext(positionCount);
+                //stream.SendNext(numCapVectices);
                 stream.SendNext(linePosition);
                 //stream.SendNext(defaultColor);
-                stream.SendNext(minDistanceBeforeNewPoint);
+                //stream.SendNext(minDistanceBeforeNewPoint);
 
             }
             else
             {
                 current_index = (int)stream.ReceiveNext();
-                trackPosition = (Vector3)stream.ReceiveNext();
-                lineDefaultWidth = (float)stream.ReceiveNext();
-                positionCount = (int)stream.ReceiveNext();
-                numCapVectices = (int)stream.ReceiveNext();
+                // trackPosition = (Vector3)stream.ReceiveNext();
+                // lineDefaultWidth = (float)stream.ReceiveNext();
+                // positionCount = (int)stream.ReceiveNext();
+                // numCapVectices = (int)stream.ReceiveNext();
                 linePosition = (Vector3)stream.ReceiveNext();
-                cameraPosition = (Vector3)stream.ReceiveNext();
-                //defaultColor = (Color)stream.ReceiveNext();
-                minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
+                // cameraPosition = (Vector3)stream.ReceiveNext();
+                // defaultColor = (Color)stream.ReceiveNext();
+                // minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
 
                 if (previous_index != current_index)
                 {
                     newLine = true;
+                    AddNewLineRenderer();
+                    previous_index = current_index;
+                    newLine = false;
                 }
-                if((trackPosition != previous_trackPosition) ||
+                if(/*(trackPosition != previous_trackPosition) ||
                     (lineDefaultWidth != previousLineWidth) ||
                     (positionCount != previousPositionCount) ||
-                    (numCapVectices != previous_numCapVectices) ||
-                    (linePosition != previousLinePosition) ||
+                    (numCapVectices != previous_numCapVectices) ||*/
+                    (linePosition != previousLinePosition) /*||
                     (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint) ||
-                    (cameraPosition != previousCameraPosition))
+                    (cameraPosition != previousCameraPosition)*/)
                 {
                     updateLine = true;
+                    UpdateLine();
+                    updateLine = false;
+                    // previous_trackPosition = trackPosition;
+                    // previousLineWidth = lineDefaultWidth;
+                    // previousPositionCount = positionCount;
+                    // previous_numCapVectices = numCapVectices;
+                    previousLinePosition = linePosition;
+                    // previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
+                    // previousCameraPosition = cameraPosition;
+
+
+
+
+
                 }
             }
         }
