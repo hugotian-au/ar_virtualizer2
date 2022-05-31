@@ -28,8 +28,10 @@ public class MySceneObjectController : MonoBehaviourPunCallbacks, IPunObservable
         }
         else
         {
-            rb.MovePosition(position);
-            rb.MoveRotation(rotation.normalized);
+            //rb.MovePosition(position);
+            //rb.MoveRotation(rotation.normalized);
+            transform.localPosition = position;
+            transform.localRotation = rotation;
         }
     }
 
