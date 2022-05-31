@@ -24,7 +24,7 @@ public class FindImageTargetPosition : MonoBehaviour
             Vector3 pos = marker.transform.localPosition;
             if (pos != Vector3.zero)
             {
-                origin_position = pos;
+                origin_position = pos - new Vector3(0.0f, 0.05f, 0.0f);
                 transform.localPosition = origin_position;
                 transform.localRotation = marker.transform.localRotation;
             }
