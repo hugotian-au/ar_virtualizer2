@@ -81,7 +81,7 @@ namespace DilmerGames
             LineRenderer goLineRenderer = go.AddComponent<LineRenderer>();
             goLineRenderer.startWidth = lineDefaultWidth;
             goLineRenderer.endWidth = lineDefaultWidth;
-            goLineRenderer.useWorldSpace = false;
+            goLineRenderer.useWorldSpace = true;
             goLineRenderer.material = MaterialUtils.CreateMaterial(defaultColor, $"Material_{controlHand.ToString()}_{lines.Count}");
             goLineRenderer.positionCount = 1;
             goLineRenderer.numCapVertices = 90;
@@ -218,7 +218,7 @@ namespace DilmerGames
                 cameraPosition = (Vector3)stream.ReceiveNext();
                 // defaultColor = (Color)stream.ReceiveNext();
                 minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
-                trackPosition = linePosition + offPosition;
+                trackPosition = linePosition - offPosition;
 
                 coordinateGo.transform.localPosition = trackPosition;
                 trackPosition = coordinateGo.transform.position;

@@ -169,8 +169,8 @@ namespace Photon.Pun.Demo.PunBasics
 
 				// #Critical
 				// Load the Room Level. 
-				PhotonNetwork.LoadLevel("VuforiaTracker");
-				// PhotonNetwork.LoadLevel("Room");
+				// PhotonNetwork.LoadLevel("VuforiaTracker");
+				PhotonNetwork.LoadLevel("Room");
 
 			}
 		}
