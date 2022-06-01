@@ -157,13 +157,13 @@ namespace DilmerGames
 
         void AddPoint(Vector3 position, Vector3 direction)
         {
-            print("current addded position is " + position);
-            print("positionCount is before setposition " + positionCount);
+            //print("current addded position is " + position);
+            //print("positionCount is before setposition " + positionCount);
             currentLineRender.SetPosition(positionCount, position);
             positionCount++;
             currentLineRender.positionCount = positionCount + 1;
             currentLineRender.SetPosition(positionCount, position);
-            print("positionCount is " + positionCount);
+            //print("positionCount is " + positionCount);
             
             // send position
             // TCPControllerClient.Instance.UpdateLine(position);
@@ -230,7 +230,7 @@ namespace DilmerGames
                     previous_index = current_index;
                     newLine = false;
                     position_number = 0;
-                    print("Begin a new line");
+                    //print("Begin a new line");
                 }
                 if (/*(trackPosition != previous_trackPosition) ||*/
                     (lineDefaultWidth != previousLineWidth) ||
@@ -250,8 +250,8 @@ namespace DilmerGames
                     previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
                     // previousCameraPosition = cameraPosition;
                     position_number += 1;
-                    print("position_number is " + position_number);
-                    print("linePosition is " + linePosition);
+                    //print("position_number is " + position_number);
+                    //print("linePosition is " + linePosition);
 
 
                 }
