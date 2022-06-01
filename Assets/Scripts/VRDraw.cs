@@ -19,7 +19,10 @@ namespace DilmerGames
         private Vector3 cameraPosition;
         private Vector3 previousCameraPosition;
 
+        private GameObject coordinateGo;
+
         private Vector3 offPosition = new Vector3(0.221f, 0.0f, -0.486f);
+        // private Vector3 offPosition = new Vector3(0.0f, 0.0f, -0.0f);
 
         private int position_number = 0;
 
@@ -64,6 +67,8 @@ namespace DilmerGames
             var trackObject = GameObject.Find("ARContent");
             objectToTrackMovement = trackObject;
 
+            coordinateGo = GameObject.Find("CoordinateConvert");
+            
             // AddNewLineRenderer();
         }
 
@@ -76,7 +81,7 @@ namespace DilmerGames
             LineRenderer goLineRenderer = go.AddComponent<LineRenderer>();
             goLineRenderer.startWidth = lineDefaultWidth;
             goLineRenderer.endWidth = lineDefaultWidth;
-            goLineRenderer.useWorldSpace = true;
+            goLineRenderer.useWorldSpace = false;
             goLineRenderer.material = MaterialUtils.CreateMaterial(defaultColor, $"Material_{controlHand.ToString()}_{lines.Count}");
             goLineRenderer.positionCount = 1;
             goLineRenderer.numCapVertices = 90;
@@ -213,7 +218,10 @@ namespace DilmerGames
                 cameraPosition = (Vector3)stream.ReceiveNext();
                 // defaultColor = (Color)stream.ReceiveNext();
                 minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
-                trackPosition = linePosition - offPosition;
+                trackPosition = linePosition + offPosition;
+
+                coordinateGo.transform.localPosition = trackPosition;
+                trackPosition = coordinateGo.transform.position;
 
                 if (previous_index != current_index)
                 {
