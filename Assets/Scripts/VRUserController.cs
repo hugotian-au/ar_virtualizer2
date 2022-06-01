@@ -48,6 +48,7 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
             else
             {
                 tracker = GameObject.Find("ARContent");
+                transform.rotation = tracker.transform.rotation;
             }
             animator = GetComponent<Animator>();
             if (!animator)
@@ -87,8 +88,11 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
                     var new_position = new Vector3(position.x - 0.221f, 0, position.z + 0.486f);
                     var lookat_pos = new Vector3(position.x, tracker.transform.position.y, position.z);
                     //var lookat_pos = diff;
+                    transform.localPosition = lookat_pos;
+                    lookat_pos = transform.position;
                     transform.LookAt(lookat_pos);
                     transform.localPosition = new_position;
+                    
                     // Quaternion rotation = Quaternion.LookRotation(new_position, new Vector3(0, 1, 0));
                     // transform.localRotation = rotation * Quaternion.Euler(0, 90, 0);
                     // animator.SetFloat("VerticalMov", 0.2f);
@@ -100,9 +104,11 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
                     var new_position = new Vector3(position.x - 0.221f, 0, position.z + 0.486f);
                     var lookat_pos = new Vector3(position.x, tracker.transform.position.y, position.z);
                     // var lookat_pos = diff;
+                    transform.localPosition = lookat_pos;
+                    lookat_pos = transform.position;
                     transform.LookAt(lookat_pos);
                     transform.localPosition = new_position;
-                    // Quaternion rotation = Quaternion.LookRotation(new_position, new Vector3(0, 1, 0));
+                     // Quaternion rotation = Quaternion.LookRotation(new_position, new Vector3(0, 1, 0));
                     // transform.localRotation = rotation * Quaternion.Euler(0, 90, 0);
                     animator.SetFloat("Speed", 0.0f);
                 }

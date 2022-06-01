@@ -108,7 +108,7 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(position);
+            stream.SendNext(transform.localPosition);
         }
         else
         {

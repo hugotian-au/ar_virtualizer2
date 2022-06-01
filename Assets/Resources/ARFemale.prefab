@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5400890391526444814}
   - component: {fileID: 2204643657909520597}
   - component: {fileID: 3651838094555295554}
+  - component: {fileID: 8908587669254549101}
   m_Layer: 0
   m_Name: ARFemale
   m_TagString: Untagged
@@ -65,5 +66,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 727c71477994adc4e9ee06a9bdc41e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8908587669254549101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321570990160924656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5735e3017b31689449a0db9d469538d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
