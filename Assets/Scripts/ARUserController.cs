@@ -78,7 +78,9 @@ public class ARUserController : MonoBehaviourPunCallbacks, IPunObservable
             }
             else
             {
-                position = transform.position;
+                var camera_position = parent_camera.transform.position;
+                position = camera_position;
+                transform.position = camera_position;
             }
         }
         else
