@@ -83,14 +83,19 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
             if (tracker != null)
             {
                 // anim.SetFloat("VerticalMov", Input.GetAxis("Vertical"));
-                if (diff.x > 0.01f || diff.z > 0.01f || diff.x < -0.01f || diff.z < -0.01f)
+                if (diff.x > 0.1f || diff.z > 0.1f || diff.x < -0.1f || diff.z < -0.1f)
                 {
                     var new_position = new Vector3(position.x - 0.221f, 0, position.z + 0.486f);
-                    var lookat_pos = new Vector3(position.x, tracker.transform.position.y, position.z);
+                    var lookat_pos = new Vector3(position.x - 0.221f, position.y, position.z + 0.486f);
                     //var lookat_pos = diff;
-                    transform.localPosition = lookat_pos;
-                    lookat_pos = transform.position;
-                    transform.LookAt(lookat_pos);
+                    //transform.localPosition = lookat_pos;
+                    //lookat_pos = transform.position;
+                    // if (diff.x > 0.3f || diff.z > 0.3f || diff.x < -0.3f || diff.z < -0.3f)
+                    {
+                        var targetPosition = transform.TransformPoint(lookat_pos);
+                        transform.LookAt(targetPosition, transform.up);
+                    }
+                    //transform.LookAt(lookat_pos);
                     transform.localPosition = new_position;
                     
                     // Quaternion rotation = Quaternion.LookRotation(new_position, new Vector3(0, 1, 0));
@@ -98,15 +103,18 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
                     // animator.SetFloat("VerticalMov", 0.2f);
                     animator.SetFloat("Speed", 0.3f);
                     // animator.SetFloat("Direction", h, directionDampTime, Time.deltaTime);
+                    prevPosition = position;
                 }
                 else
                 {
                     var new_position = new Vector3(position.x - 0.221f, 0, position.z + 0.486f);
-                    var lookat_pos = new Vector3(position.x, tracker.transform.position.y, position.z);
+                    var lookat_pos = new Vector3(position.x - 0.221f, position.y, position.z + 0.486f);
                     // var lookat_pos = diff;
-                    transform.localPosition = lookat_pos;
-                    lookat_pos = transform.position;
-                    transform.LookAt(lookat_pos);
+                    //transform.localPosition = lookat_pos;
+                    //lookat_pos = transform.position;
+                    //transform.LookAt(lookat_pos);
+                    //var targetPosition = transform.TransformPoint(lookat_pos);
+                    //transform.LookAt(targetPosition, transform.up);
                     transform.localPosition = new_position;
                      // Quaternion rotation = Quaternion.LookRotation(new_position, new Vector3(0, 1, 0));
                     // transform.localRotation = rotation * Quaternion.Euler(0, 90, 0);
@@ -114,8 +122,6 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
             // anim.SetFloat("HorizontalMov", Input.GetAxis("Horizontal"));
-
-            prevPosition = position;
         }
     }
 
