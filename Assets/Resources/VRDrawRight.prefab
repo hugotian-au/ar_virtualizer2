@@ -69,6 +69,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlHand: 2
   objectToTrackMovement: {fileID: 0}
-  defaultColor: {r: 0.745283, g: 0.4253738, b: 0.4253738, a: 1}
+  defaultColor: {r: 0.9433962, g: 0.048949808, b: 0.048949808, a: 1}
   editorObjectToTrackMovement: {fileID: 0}
   allowEditorControls: 0
