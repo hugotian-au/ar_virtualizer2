@@ -107,3 +107,17 @@ MonoBehaviour:
       id: 0
       description: Navigation Action
       axisConstraint: 0
+  - localizationKey: 
+    keyword: Show Room
+    keyCode: 0
+    action:
+      id: 0
+      description: Navigation Action
+      axisConstraint: 0
+  - localizationKey: 
+    keyword: Hide Room
+    keyCode: 0
+    action:
+      id: 0
+      description: Navigation Action
+      axisConstraint: 0

@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using Photon.Realtime;
+using UnityEngine.XR;
 
 namespace Photon.Pun.Demo.PunBasics
 {
@@ -57,6 +58,16 @@ namespace Photon.Pun.Demo.PunBasics
 			// #Critical
 			// this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
 			PhotonNetwork.AutomaticallySyncScene = true;
+			if (XRDevice.SetTrackingSpaceType(TrackingSpaceType.RoomScale))
+			{
+				// RoomScale mode was set successfully.  App can now assume that y=0 in Unity world coordinate represents the floor.
+				print("Successfully set the tracking type!");
+			}
+			else
+			{
+				// RoomScale mode was not set successfully.  App cannot make assumptions about where the floor plane is.
+				print("Failed to set the tracking type!");
+			}
 
 		}
 
@@ -169,8 +180,8 @@ namespace Photon.Pun.Demo.PunBasics
 
 				// #Critical
 				// Load the Room Level. 
-				// PhotonNetwork.LoadLevel("VuforiaTracker");
-				PhotonNetwork.LoadLevel("Room");
+				PhotonNetwork.LoadLevel("VuforiaTracker");
+				// PhotonNetwork.LoadLevel("Room");
 
 			}
 		}

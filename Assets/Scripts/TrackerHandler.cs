@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.XR.WSA;
 using Microsoft.MixedReality.Toolkit.Experimental.Utilities;
 using Vuforia;
@@ -15,6 +16,18 @@ public class TrackerHandler : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        void Awake()
+        {
+            DontDestroyOnLoad(this.gameObject);
+            if (XRDevice.SetTrackingSpaceType(TrackingSpaceType.RoomScale))
+            {
+                // RoomScale mode was set successfully.  App can now assume that y=0 in Unity world coordinate represents the floor.
+            }
+            else
+            {
+                // RoomScale mode was not set successfully.  App cannot make assumptions about where the floor plane is.
+            }
+        }
     }
 
     // Start is called before the first frame update
