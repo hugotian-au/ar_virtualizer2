@@ -85,8 +85,8 @@ public class VRUserController : MonoBehaviourPunCallbacks, IPunObservable
                 // anim.SetFloat("VerticalMov", Input.GetAxis("Vertical"));
                 if (diff.x > 0.1f || diff.z > 0.1f || diff.x < -0.1f || diff.z < -0.1f)
                 {
-                    var new_position = new Vector3(position.x - 0.221f, 0, position.z + 0.486f);
-                    var lookat_pos = new Vector3(position.x - 0.221f, position.y, position.z + 0.486f);
+                    var new_position = new Vector3(position.x - 0.272f, 0, position.z + 0.458f);
+                    var lookat_pos = new Vector3(position.x - 0.272f, position.y, position.z + 0.458f);
                     //var lookat_pos = diff;
                     //transform.localPosition = lookat_pos;
                     //lookat_pos = transform.position;
