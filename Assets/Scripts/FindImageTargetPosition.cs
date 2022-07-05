@@ -62,7 +62,7 @@ public class FindImageTargetPosition : MonoBehaviour
         {
             origin_position = new Vector3(10.0f, 5.05f, 3.0f);
             transform.localPosition = origin_position;
-            transform.localRotation = Quaternion.Euler(-83.369f, 185.838f, -10.511f);
+            // transform.localRotation = Quaternion.Euler(-83.369f, 185.838f, -10.511f);
         }
     }
 }

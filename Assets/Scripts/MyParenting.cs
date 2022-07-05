@@ -10,5 +10,8 @@ public class MyParenting : MonoBehaviour
     {
         parent = GameObject.Find("ARContent");
         transform.parent = parent.transform;
+        transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        transform.localRotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 }
