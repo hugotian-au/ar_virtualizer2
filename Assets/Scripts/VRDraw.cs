@@ -218,7 +218,7 @@ namespace DilmerGames
                 cameraPosition = (Vector3)stream.ReceiveNext();
                 // defaultColor = (Color)stream.ReceiveNext();
                 minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
-                trackPosition = linePosition - offPosition;
+                trackPosition = linePosition/* - offPosition*/;
 
                 coordinateGo.transform.localPosition = trackPosition;
                 trackPosition = coordinateGo.transform.position;
