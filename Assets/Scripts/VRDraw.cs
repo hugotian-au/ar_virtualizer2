@@ -226,35 +226,45 @@ namespace DilmerGames
                 if (previous_index != current_index)
                 {
                     newLine = true;
-                    AddNewLineRenderer();
-                    previous_index = current_index;
-                    newLine = false;
-                    position_number = 0;
-                    //print("Begin a new line");
-                }
-                if (/*(trackPosition != previous_trackPosition) ||*/
-                    (lineDefaultWidth != previousLineWidth) ||
-                    /*(positionCount != previousPositionCount) ||
-                    (numCapVectices != previous_numCapVectices) ||*/
-                    (linePosition != previousLinePosition) ||
-                    (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint))
-                {
-                    updateLine = true;
-                    UpdateLine();
-                    updateLine = false;
                     previous_trackPosition = trackPosition;
                     previousLineWidth = lineDefaultWidth;
                     // previousPositionCount = positionCount;
                     // previous_numCapVectices = numCapVectices;
                     previousLinePosition = linePosition;
                     previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
-                    // previousCameraPosition = cameraPosition;
-                    position_number += 1;
-                    //print("position_number is " + position_number);
-                    //print("linePosition is " + linePosition);
-
-
+                    AddNewLineRenderer();
+                    previous_index = current_index;
+                    newLine = false;
+                    position_number = 0;
+                    //print("Begin a new line");
                 }
+                else
+                {
+                    if (/*(trackPosition != previous_trackPosition) ||*/
+                        (lineDefaultWidth != previousLineWidth) ||
+                        /*(positionCount != previousPositionCount) ||
+                        (numCapVectices != previous_numCapVectices) ||*/
+                        (linePosition != previousLinePosition) ||
+                        (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint))
+                    {
+                        updateLine = true;
+
+                        previous_trackPosition = trackPosition;
+                        previousLineWidth = lineDefaultWidth;
+                        // previousPositionCount = positionCount;
+                        // previous_numCapVectices = numCapVectices;
+                        previousLinePosition = linePosition;
+                        previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
+                        // previousCameraPosition = cameraPosition;
+                        position_number += 1;
+                        //print("position_number is " + position_number);
+                        //print("linePosition is " + linePosition);
+                        UpdateLine();
+                        updateLine = false;
+
+                    }
+                }
+
             }
         }
     }
