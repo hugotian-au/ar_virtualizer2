@@ -18,8 +18,8 @@ namespace DilmerGames
         public Vector3 previousLinePosition;
         private Vector3 cameraPosition;
         public Vector3 previousCameraPosition;
-        private bool removeLines = false;
-        private bool prev_removeLines = false;
+        private int removeLines = 0;
+        private int prev_removeLines = 0;
 
         private GameObject coordinateGo;
 
@@ -140,7 +140,7 @@ namespace DilmerGames
                 previous_index = current_index;
             }
 
-            if (removeLines && !prev_removeLines)
+            if (removeLines == 1 && prev_removeLines == 0)
             {
                 //ToggleScreen();
                 var count = lines.Count;
@@ -153,8 +153,9 @@ namespace DilmerGames
                     }
                     i = i + 1;
                 }
-                removeLines = false;
                 prev_removeLines = removeLines;
+                removeLines = 0;
+
             }
 
         }
@@ -221,38 +222,25 @@ namespace DilmerGames
 
             if (stream.IsWriting)
             {
-                stream.SendNext(current_index);
-                // stream.SendNext(trackPosition);
-                stream.SendNext(lineDefaultWidth);
-                //stream.SendNext(positionCount);
-                //stream.SendNext(numCapVectices);
-                stream.SendNext(linePosition);
-                // stream.SendNext(defaultColor);
-                stream.SendNext(minDistanceBeforeNewPoint);
-
-                stream.SendNext(removeLines);
+               
 
             }
             else
             {
+                removeLines = (int)stream.ReceiveNext();
                 current_index = (int)stream.ReceiveNext();
-                // trackPosition = (Vector3)stream.ReceiveNext();
-                lineDefaultWidth = (float)stream.ReceiveNext();
-                // positionCount = (int)stream.ReceiveNext();
-                // numCapVectices = (int)stream.ReceiveNext();
-                linePosition = (Vector3)stream.ReceiveNext();
-                // print("linePosition is " + linePosition);
+                trackPosition = (Vector3)stream.ReceiveNext();
                 cameraPosition = (Vector3)stream.ReceiveNext();
                 // defaultColor = (Color)stream.ReceiveNext();
-                minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
-                trackPosition = linePosition/* - offPosition*/;
+                // minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
+                // trackPosition = linePosition/* - offPosition*/;
 
-                removeLines = (bool)stream.ReceiveNext();
+                
 
                 coordinateGo.transform.localPosition = trackPosition;
                 trackPosition = coordinateGo.transform.position;
 
-                if (!removeLines)
+                if (removeLines == 0)
                 {
 
 
@@ -271,7 +259,7 @@ namespace DilmerGames
                         position_number = 0;
                         //print("Begin a new line");
                     }
-                    else
+                    else if (current_index != 0)
                     {
                         print("Receive line points");
                         print("linePosition is: " + linePosition);
@@ -284,27 +272,15 @@ namespace DilmerGames
                         {
                             print("Line Position and previous Line Position Not equal to vector 0.0");
                         }
-                        if (/*(trackPosition != previous_trackPosition) ||*/
-                            (lineDefaultWidth != previousLineWidth) ||
-                            /*(positionCount != previousPositionCount) ||
-                            (numCapVectices != previous_numCapVectices) ||*/
-                            (linePosition != previousLinePosition) ||
-                            (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint))
+                        if ((trackPosition != previous_trackPosition))
                         {
                             updateLine = true;
 
                             print("Update a old line");
 
                             previous_trackPosition = trackPosition;
-                            previousLineWidth = lineDefaultWidth;
-                            // previousPositionCount = positionCount;
-                            // previous_numCapVectices = numCapVectices;
-                            previousLinePosition = linePosition;
-                            previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
                             // previousCameraPosition = cameraPosition;
                             position_number += 1;
-                            //print("position_number is " + position_number);
-                            //print("linePosition is " + linePosition);
                             UpdateLine();
                             updateLine = false;
 
