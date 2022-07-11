@@ -140,7 +140,7 @@ namespace DilmerGames
                 previous_index = current_index;
             }
 
-            if (removeLines == 1 && prev_removeLines == 0)
+            if (removeLines == 1)
             {
                 //ToggleScreen();
                 var count = lines.Count;
@@ -153,7 +153,6 @@ namespace DilmerGames
                     }
                     i = i + 1;
                 }
-                prev_removeLines = removeLines;
                 removeLines = 0;
 
             }
