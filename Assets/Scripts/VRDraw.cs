@@ -11,13 +11,15 @@ namespace DilmerGames
         private int current_index = 1;
         private int previous_index = 0;
         private Vector3 trackPosition;
-        private Vector3 previous_trackPosition;
+        public Vector3 previous_trackPosition;
         private int numCapVectices;
         private int previous_numCapVectices;
         private Vector3 linePosition;
-        private Vector3 previousLinePosition;
+        public Vector3 previousLinePosition;
         private Vector3 cameraPosition;
-        private Vector3 previousCameraPosition;
+        public Vector3 previousCameraPosition;
+        private bool removeLines = false;
+        private bool prev_removeLines = false;
 
         private GameObject coordinateGo;
 
@@ -104,7 +106,7 @@ namespace DilmerGames
                 previousLineWidth = lineDefaultWidth;
                 previousPositionCount = positionCount;
                 previous_numCapVectices = numCapVectices;
-                previousLinePosition = linePosition;
+                // previousLinePosition = linePosition;
                 previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
                 previousCameraPosition = cameraPosition;
             }
@@ -117,7 +119,7 @@ namespace DilmerGames
             }
 
             // secondary right controller
-            if(controlHand == ControlHand.Right && updateLine)
+            if (controlHand == ControlHand.Right && updateLine)
             {
                 //VRStats.Instance.firstText.text = $"Axis1D.SecondaryIndexTrigger: {OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger)}";
                 // UpdateLine();
@@ -126,7 +128,7 @@ namespace DilmerGames
                 previousLineWidth = lineDefaultWidth;
                 previousPositionCount = positionCount;
                 previous_numCapVectices = numCapVectices;
-                previousLinePosition = linePosition;
+                // previousLinePosition = linePosition;
                 previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
                 previousCameraPosition = cameraPosition;
             }
@@ -136,6 +138,23 @@ namespace DilmerGames
                 //AddNewLineRenderer();
                 newLine = false;
                 previous_index = current_index;
+            }
+
+            if (removeLines && !prev_removeLines)
+            {
+                //ToggleScreen();
+                var count = lines.Count;
+                int i = 0;
+                foreach (var line in lines)
+                {
+                    if (line != null && (i != count - 1))
+                    {
+                        line.SetVertexCount(1); 
+                    }
+                    i = i + 1;
+                }
+                removeLines = false;
+                prev_removeLines = removeLines;
             }
 
         }
@@ -195,6 +214,11 @@ namespace DilmerGames
 
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
+
+            print("Before Receive line points!");
+            print("linePosition is: " + linePosition);
+            print("previousLinePosition is: " + previousLinePosition);
+
             if (stream.IsWriting)
             {
                 stream.SendNext(current_index);
@@ -206,6 +230,8 @@ namespace DilmerGames
                 // stream.SendNext(defaultColor);
                 stream.SendNext(minDistanceBeforeNewPoint);
 
+                stream.SendNext(removeLines);
+
             }
             else
             {
@@ -215,53 +241,74 @@ namespace DilmerGames
                 // positionCount = (int)stream.ReceiveNext();
                 // numCapVectices = (int)stream.ReceiveNext();
                 linePosition = (Vector3)stream.ReceiveNext();
+                // print("linePosition is " + linePosition);
                 cameraPosition = (Vector3)stream.ReceiveNext();
                 // defaultColor = (Color)stream.ReceiveNext();
                 minDistanceBeforeNewPoint = (float)stream.ReceiveNext();
                 trackPosition = linePosition/* - offPosition*/;
 
+                removeLines = (bool)stream.ReceiveNext();
+
                 coordinateGo.transform.localPosition = trackPosition;
                 trackPosition = coordinateGo.transform.position;
 
-                if (previous_index != current_index)
+                if (!removeLines)
                 {
-                    newLine = true;
-                    previous_trackPosition = trackPosition;
-                    previousLineWidth = lineDefaultWidth;
-                    // previousPositionCount = positionCount;
-                    // previous_numCapVectices = numCapVectices;
-                    previousLinePosition = linePosition;
-                    previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
-                    AddNewLineRenderer();
-                    previous_index = current_index;
-                    newLine = false;
-                    position_number = 0;
-                    //print("Begin a new line");
-                }
-                else
-                {
-                    if (/*(trackPosition != previous_trackPosition) ||*/
-                        (lineDefaultWidth != previousLineWidth) ||
-                        /*(positionCount != previousPositionCount) ||
-                        (numCapVectices != previous_numCapVectices) ||*/
-                        (linePosition != previousLinePosition) ||
-                        (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint))
-                    {
-                        updateLine = true;
 
+
+                    if (previous_index != current_index)
+                    {
+                        newLine = true;
                         previous_trackPosition = trackPosition;
                         previousLineWidth = lineDefaultWidth;
                         // previousPositionCount = positionCount;
                         // previous_numCapVectices = numCapVectices;
                         previousLinePosition = linePosition;
                         previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
-                        // previousCameraPosition = cameraPosition;
-                        position_number += 1;
-                        //print("position_number is " + position_number);
-                        //print("linePosition is " + linePosition);
-                        UpdateLine();
-                        updateLine = false;
+                        AddNewLineRenderer();
+                        previous_index = current_index;
+                        newLine = false;
+                        position_number = 0;
+                        //print("Begin a new line");
+                    }
+                    else
+                    {
+                        print("Receive line points");
+                        print("linePosition is: " + linePosition);
+                        print("previousLinePosition is: " + previousLinePosition);
+                        if (linePosition != new Vector3(0.0f, 0.0f, 0.0f))
+                        {
+                            print("Not equal to vector 0.0");
+                        }
+                        if (linePosition != previousLinePosition)
+                        {
+                            print("Line Position and previous Line Position Not equal to vector 0.0");
+                        }
+                        if (/*(trackPosition != previous_trackPosition) ||*/
+                            (lineDefaultWidth != previousLineWidth) ||
+                            /*(positionCount != previousPositionCount) ||
+                            (numCapVectices != previous_numCapVectices) ||*/
+                            (linePosition != previousLinePosition) ||
+                            (minDistanceBeforeNewPoint != previousMinDistanceBeforeNewPoint))
+                        {
+                            updateLine = true;
 
+                            print("Update a old line");
+
+                            previous_trackPosition = trackPosition;
+                            previousLineWidth = lineDefaultWidth;
+                            // previousPositionCount = positionCount;
+                            // previous_numCapVectices = numCapVectices;
+                            previousLinePosition = linePosition;
+                            previousMinDistanceBeforeNewPoint = minDistanceBeforeNewPoint;
+                            // previousCameraPosition = cameraPosition;
+                            position_number += 1;
+                            //print("position_number is " + position_number);
+                            //print("linePosition is " + linePosition);
+                            UpdateLine();
+                            updateLine = false;
+
+                        }
                     }
                 }
 

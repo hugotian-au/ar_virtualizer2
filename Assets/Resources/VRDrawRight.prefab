@@ -47,7 +47,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 1
   observableSearch: 2
   ObservedComponents:
@@ -67,6 +67,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f8667a759bb4708aa2e0defb06b5fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  previous_trackPosition: {x: 0, y: 0, z: 0}
+  previousLinePosition: {x: 0, y: 0, z: 0}
+  previousCameraPosition: {x: 0, y: 0, z: 0}
   controlHand: 2
   objectToTrackMovement: {fileID: 0}
   defaultColor: {r: 0.9433962, g: 0.048949808, b: 0.048949808, a: 1}
