@@ -72,6 +72,6 @@ MonoBehaviour:
   previousCameraPosition: {x: 0, y: 0, z: 0}
   controlHand: 1
   objectToTrackMovement: {fileID: 0}
-  defaultColor: {r: 0.26433173, g: 0.8207547, b: 0.07355818, a: 1}
+  defaultColor: {r: 0, g: 1, b: 0, a: 0}
   editorObjectToTrackMovement: {fileID: 0}
   allowEditorControls: 0
