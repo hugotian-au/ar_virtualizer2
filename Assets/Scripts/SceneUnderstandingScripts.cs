@@ -695,9 +695,10 @@ public class SceneUnderstandingScripts : MonoBehaviour
         // Add a SceneUnderstandingProperties Component to the Parent Holder Object
         // this component will hold a GUID and a SceneObjectKind that correspond to this
         // specific Object 
-        // SceneUnderstandingProperties properties = unityParentHolderObject.AddComponent<SceneUnderstandingProperties>();
-        // properties.suObjectGUID = suObject.Id;
-        // properties.suObjectKind = suObject.Kind;
+
+        SceneUnderstandingProperties properties = unityParentHolderObject.AddComponent<SceneUnderstandingProperties>();
+        properties.suObjectGUID = suObject.Id;
+        properties.suObjectKind = suObject.Kind;
 
         //Return that the Scene Object was indeed represented as a unity object and wasn't skipped
         return true;
