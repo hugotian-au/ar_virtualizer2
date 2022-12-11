@@ -603,11 +603,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Vuforia.Engine.VuforiaHoloLensMRTK
   metroPackageVersion: 9.8.11.0
-  metroCertificatePath: Assets/WSATestCertificate.pfx
+  metroCertificatePath: 
   metroCertificatePassword: 
-  metroCertificateSubject: DefaultCompany
-  metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 80a83f9a41d2d801
+  metroCertificateSubject: 
+  metroCertificateIssuer: 
+  metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: ImageTargets, ModelTargets, and VuMarks on HoloLens
   wsaImages:
     65636: Assets/Common/Icons/UWP/StoreLogo.scale-100.png
