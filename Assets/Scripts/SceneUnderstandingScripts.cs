@@ -498,6 +498,18 @@ public class SceneUnderstandingScripts : MonoBehaviour
             SceneFragment[] sceneFragmentsArray = new SceneFragment[1] { sceneFragment };
             cachedDeserializedScene = Scene.FromFragments(sceneFragmentsArray);
 
+            SceneObject firstFloor = null;
+
+            // Find the first floor object
+            foreach (var sceneObject in cachedDeserializedScene.SceneObjects)
+            {
+                if (sceneObject.Kind == SceneObjectKind.Floor)
+                {
+                    firstFloor = sceneObject;
+                    break;
+                }
+            }
+
             // Get Latest Scene GUID
             Guid latestGuidSnapShot = GetLatestSUSceneId();
             LastDisplayedSceneGuid = latestGuidSnapShot;
